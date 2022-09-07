@@ -9,7 +9,8 @@ AppDataSource.initialize()
   .then(async () => {
     console.log("Data Source has been initialized!");
   })
-  .catch((error) => console.log(error));
+  .catch((error) => console.log("Error during build: ", error));
+
 const app = express();
 app.use(bodyParser.json());
 
