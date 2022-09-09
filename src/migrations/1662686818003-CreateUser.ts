@@ -40,19 +40,19 @@ export class CreateUser1662686818003 implements MigrationInterface {
             name: "email",
             type: "varchar",
             length: "150",
-            isNullable: true,
+            isNullable: false,
           },
           {
             name: "password",
             type: "varchar",
             length: "200",
-            isNullable: true,
+            isNullable: false,
           },
           {
             name: "telephone",
             type: "varchar",
             length: "13",
-            isNullable: true,
+            isNullable: false,
           },
           {
             name: "created_at",
