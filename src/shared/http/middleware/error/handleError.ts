@@ -1,9 +1,10 @@
-import { NextFunction, Request, response } from "express";
+import { NextFunction, Request, Response, response } from "express";
 import { AppError } from "../../../mainError/mainErrorClass";
 
 export const handleError = (
   error: Error,
   request: Request,
+  response: Response,
   next: NextFunction
 ) => {
   if (error instanceof AppError) {

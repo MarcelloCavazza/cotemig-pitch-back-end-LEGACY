@@ -3,6 +3,7 @@ import * as bodyParser from "body-parser";
 import { AppDataSource } from "./database/data-source";
 import { routes } from "./http/routes/index.routes";
 import * as cors from "cors";
+import { handleError } from "./http/middleware/error/handleError";
 
 AppDataSource.initialize()
   .then(async () => {
@@ -15,7 +16,7 @@ app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use("/v1", routes);
-
+app.use(handleError);
 // app.get("/status", async function (req: Request, res: Response) {
 //   const teste = await AppDataSource.manager.save(
 //     AppDataSource.manager.create(User, {
@@ -25,7 +26,8 @@ app.use("/v1", routes);
 //   res.json(teste);
 // });
 
-console.log(
-  "Express server has started on port 3000. Open http://localhost:3000/"
-);
-app.listen(3000);
+app.listen(3000, () => {
+  console.log(
+    "Express server has started on port 3000. Open http://localhost:3000/"
+  );
+});
