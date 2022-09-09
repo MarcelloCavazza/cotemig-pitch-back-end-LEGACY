@@ -1,5 +1,6 @@
 import "reflect-metadata";
 import { DataSource } from "typeorm";
+import { AddressUser } from "./entity/AddressUser";
 import { User } from "./entity/User";
 
 export const AppDataSource = new DataSource({
@@ -11,7 +12,7 @@ export const AppDataSource = new DataSource({
   database: "cttdatabase",
   synchronize: true,
   logging: false,
-  entities: [User],
+  entities: [User, AddressUser],
   migrations: [],
   subscribers: [],
 });

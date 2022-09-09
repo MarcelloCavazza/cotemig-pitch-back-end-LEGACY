@@ -39,5 +39,5 @@ export class AddressUser {
   created_at: string;
 
   @Column()
-  updated_at: string;
+  updated_at?: string;
 }
