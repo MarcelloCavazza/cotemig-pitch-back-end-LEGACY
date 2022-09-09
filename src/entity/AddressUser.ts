@@ -1,9 +1,9 @@
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
+import { Entity, Column, PrimaryColumn } from "typeorm";
 
 @Entity()
 export class AddressUser {
-  @PrimaryGeneratedColumn()
-  id: number;
+  @PrimaryColumn()
+  id: string;
 
   @Column()
   user_id: string;
@@ -22,9 +22,6 @@ export class AddressUser {
 
   @Column()
   number: number;
-
-  @Column()
-  lastName: string;
 
   @Column()
   district: string;
