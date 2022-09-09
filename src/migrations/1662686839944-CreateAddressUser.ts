@@ -26,7 +26,7 @@ export class CreateAddressUser1662686839944 implements MigrationInterface {
           },
           {
             name: "cep",
-            type: "string",
+            type: "varchar",
             length: "8",
             isNullable: false,
           },
@@ -44,21 +44,20 @@ export class CreateAddressUser1662686839944 implements MigrationInterface {
           },
           {
             name: "number",
-            type: "number",
-            length: "100",
-            isNullable: true,
+            type: "integer",
+            isNullable: false,
           },
           {
             name: "district",
             type: "varchar",
             length: "100",
-            isNullable: true,
+            isNullable: false,
           },
           {
             name: "street",
             type: "varchar",
             length: "100",
-            isNullable: true,
+            isNullable: false,
           },
           {
             name: "addtional_info",
