@@ -21,7 +21,7 @@ export class CreateUser1662686818003 implements MigrationInterface {
           {
             name: "profile",
             type: "enum",
-            enum: ["admin", "client"],
+            enum: ["admin", "client", "lawyer"],
             isNullable: false,
           },
           {
