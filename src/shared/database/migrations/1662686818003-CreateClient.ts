@@ -1,22 +1,16 @@
 import { MigrationInterface, QueryRunner, Table } from "typeorm";
 
-export class CreateAddressUser1662686839944 implements MigrationInterface {
+export class CreateUser1662686818003 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: "address_user",
+        name: "client",
         columns: [
           {
             name: "id",
             type: "varchar",
-            length: "36",
+            length: "50",
             isPrimary: true,
-          },
-          {
-            name: "user_id",
-            type: "varchar",
-            length: "36",
-            isNullable: false,
           },
           {
             name: "status",
@@ -25,45 +19,34 @@ export class CreateAddressUser1662686839944 implements MigrationInterface {
             isNullable: false,
           },
           {
-            name: "cep",
+            name: "name",
             type: "varchar",
-            length: "8",
+            length: "200",
             isNullable: false,
           },
           {
-            name: "city",
+            name: "cpf",
             type: "varchar",
-            length: "50",
+            length: "11",
             isNullable: false,
           },
           {
-            name: "state",
+            name: "email",
             type: "varchar",
-            length: "2",
+            length: "150",
             isNullable: false,
           },
           {
-            name: "number",
-            type: "integer",
+            name: "password",
+            type: "varchar",
+            length: "200",
             isNullable: false,
           },
           {
-            name: "district",
+            name: "telephone",
             type: "varchar",
-            length: "100",
+            length: "13",
             isNullable: false,
-          },
-          {
-            name: "street",
-            type: "varchar",
-            length: "100",
-            isNullable: false,
-          },
-          {
-            name: "addtional_info",
-            type: "varchar",
-            length: "250",
-            isNullable: true,
           },
           {
             name: "created_at",
@@ -83,6 +66,6 @@ export class CreateAddressUser1662686839944 implements MigrationInterface {
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropTable("address_user");
+    await queryRunner.dropTable("client");
   }
 }

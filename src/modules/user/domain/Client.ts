@@ -1,18 +1,11 @@
-export enum STATUS_USER {
+export enum STATUS_CLIENT {
   ACTIVE = "active",
   INCATIVE = "inactive",
 }
 
-export enum PROFILE_USER {
-  ADMIN = "",
-  CLIENT = "",
-  LAWYER = "",
-}
-
-export class User {
+export class Client {
   public id: string;
   public status: string;
-  public profile: string;
   public name: string;
   public cpf: string;
   public email: string;

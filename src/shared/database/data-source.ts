@@ -1,7 +1,7 @@
 import "reflect-metadata";
 import { DataSource } from "typeorm";
-import { AddressUser } from "../../modules/user/infra/entities/AddressUser";
-import { User } from "../../modules/user/infra/entities/User";
+import { AddressClient } from "../../modules/user/infra/entities/AddressClient";
+import { Client } from "../../modules/user/infra/entities/Client";
 import * as dotenv from "dotenv";
 dotenv.config();
 
@@ -16,7 +16,7 @@ export const AppDataSource = new DataSource({
   database: process.env.TYPEORM_DATABASE,
   synchronize: false,
   logging: false,
-  entities: [User, AddressUser],
+  entities: [Client, AddressClient],
   migrations: ["src/migrations/*.ts"],
   subscribers: [""],
 });

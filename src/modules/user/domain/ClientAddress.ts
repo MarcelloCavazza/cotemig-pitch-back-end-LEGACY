@@ -3,7 +3,7 @@ export enum STATUS_ADDRESS {
   INCATIVE = "inactive",
 }
 
-export class User {
+export class ClientAddress {
   public id: string;
   public user_id: string;
   public cep: string;
