@@ -21,9 +21,6 @@ export class Client {
   telephone: string;
 
   @Column()
-  profile: string;
-
-  @Column()
   status: string;
 
   @Column()
