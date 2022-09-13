@@ -17,3 +17,13 @@ export interface IClient {
   created_at: string;
   updated_at?: string;
 }
+
+export interface IRecieveUpdateClientData {
+  id: string;
+  status?: string;
+  name?: string;
+  cpf?: string;
+  email?: string;
+  password?: string;
+  telephone?: string;
+}
