@@ -5,7 +5,7 @@ import { ClientRepository } from "../../repositories/ClientRepository";
 import { formatDate } from "../../../../shared/utils/formatDate";
 import { AppError } from "../../../../shared/mainError/mainErrorClass";
 
-export class CreateUserUseCase {
+export class CreateClientUseCase {
   private client = new Client();
   private repository = new ClientRepository();
 

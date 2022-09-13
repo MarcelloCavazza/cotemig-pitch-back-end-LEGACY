@@ -1,5 +1,8 @@
-import { Client } from "../domain/Client";
+import { IClient } from "../dto/ClientDTO";
 
 export interface IClientRespository {
-  create(data: Client): Promise<void>;
+  create(data: IClient): Promise<void>;
+  update(data: IClient): Promise<void>;
+  deleteById(id: string): Promise<void>;
+  listById(id: string): Promise<IClient>;
 }

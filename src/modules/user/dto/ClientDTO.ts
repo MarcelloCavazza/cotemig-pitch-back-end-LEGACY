@@ -15,4 +15,5 @@ export interface IClient {
   password: string;
   telephone: string;
   created_at: string;
+  updated_at?: string;
 }
