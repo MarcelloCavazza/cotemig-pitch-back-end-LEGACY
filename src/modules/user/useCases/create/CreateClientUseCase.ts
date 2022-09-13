@@ -3,13 +3,15 @@ import { IRecieveCreateClientData } from "../../dto/ClientDTO";
 import { v4 as uuid } from "uuid";
 import { ClientRepository } from "../../repositories/ClientRepository";
 import { formatDate } from "../../../../shared/utils/formatDate";
+import { AppError } from "../../../../shared/mainError/mainErrorClass";
 
 export class CreateUserUseCase {
-  client = new Client();
+  private client = new Client();
+  private repository = new ClientRepository();
 
   public async create(data: IRecieveCreateClientData): Promise<Client> {
     const { cpf, email, name, password, telephone } = data;
-    const repository = new ClientRepository();
+
     Object.assign(this.client, {
       id: uuid(),
       cpf,
@@ -20,11 +22,11 @@ export class CreateUserUseCase {
       telephone,
       created_at: formatDate(new Date().toISOString()),
     });
-    console.log(this.client);
+
     try {
-      await repository.create(this.client);
+      await this.repository.create(this.client);
     } catch (error) {
-      console.log(error);
+      new AppError(error);
     }
 
     return this.client;

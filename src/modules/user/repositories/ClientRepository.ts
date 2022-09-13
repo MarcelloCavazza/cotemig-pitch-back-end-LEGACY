@@ -4,11 +4,11 @@ import { Client } from "../infra/entities/ClientEntity";
 import { IClientRespository } from "./IClientRepository";
 
 export class ClientRepository implements IClientRespository {
-  // private clientRepository = AppDataSource.getRepository(Client);
+  private clientRepository = AppDataSource.manager;
+  
   public async create(data: IClient) {
-    await AppDataSource.manager.save(
-      AppDataSource.manager.create(Client, data)
+    await this.clientRepository.save(
+      this.clientRepository.create(Client, data)
     );
-    // await this.clientRepository.save(data);
   }
 }
