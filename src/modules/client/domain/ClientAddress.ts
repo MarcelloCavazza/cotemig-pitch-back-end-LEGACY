@@ -5,7 +5,7 @@ export enum STATUS_ADDRESS {
 
 export class ClientAddress {
   public id: string;
-  public user_id: string;
+  public client_id: string;
   public cep: string;
   public city: string;
   public number: number;

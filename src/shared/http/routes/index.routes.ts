@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { client } from "../../../modules/user/infra/http/client.routes";
+import { client } from "../../../modules/client/infra/http/client.routes";
 
 const routes = Router();
 

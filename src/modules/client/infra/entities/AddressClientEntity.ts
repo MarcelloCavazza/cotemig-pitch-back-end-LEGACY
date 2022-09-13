@@ -6,7 +6,7 @@ export class AddressClient {
   id: string;
 
   @Column()
-  user_id: string;
+  client_id: string;
 
   @Column()
   cep: string;

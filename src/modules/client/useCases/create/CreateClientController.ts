@@ -5,8 +5,8 @@ export class CreateClientController {
   public async create(request: Request, response: Response): Promise<Response> {
     const { name, cpf, email, password, telephone } = request.body;
 
-    const createUserUseCase = new CreateClientUseCase();
-    const client = await createUserUseCase.create({
+    const createClientUseCase = new CreateClientUseCase();
+    const client = await createClientUseCase.create({
       name,
       cpf,
       email,
