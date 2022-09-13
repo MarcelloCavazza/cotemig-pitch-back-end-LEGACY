@@ -17,14 +17,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use("/v1", routes);
 app.use(handleError);
-// app.get("/status", async function (req: Request, res: Response) {
-//   const teste = await AppDataSource.manager.save(
-//     AppDataSource.manager.create(User, {
-//       name: "Timber",
-//     })
-//   );
-//   res.json(teste);
-// });
 
 app.listen(3000, () => {
   console.log(
