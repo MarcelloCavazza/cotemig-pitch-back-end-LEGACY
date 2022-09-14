@@ -1,24 +1,22 @@
 import { AppDataSource } from "../../../../shared/database/data-source";
 import { AppError } from "../../../../shared/mainError/mainErrorClass";
-import { STATUS_CLIENT } from "../domain/Client";
-import { IClient } from "../dto/ClientDTO";
-import { Client } from "../infra/entities/ClientEntity";
-import { IClientRespository } from "./IClientRepository";
+import { STATUS_ADMIN } from "../domain/Admin";
+import { IAdmin } from "../dto/AdminDTO";
+import { Admin } from "../infra/entities/AdminEntity";
+import { IAdminRespository } from "./IAdminRepository";
 
-export class ClientRepository implements IClientRespository {
+export class AdminRepository implements IAdminRespository {
   private clientRepository = AppDataSource.manager;
 
-  public async create(data: IClient) {
-    await this.clientRepository.save(
-      this.clientRepository.create(Client, data)
-    );
+  public async create(data: IAdmin) {
+    await this.clientRepository.save(this.clientRepository.create(Admin, data));
   }
-  public async update(data: IClient): Promise<void> {
+  public async update(data: IAdmin): Promise<void> {
     const { id, ...params } = data;
     try {
       const result = await this.clientRepository
         .createQueryBuilder()
-        .update(Client)
+        .update(Admin)
         .set(params)
         .where("id = :id", { id })
         .execute();
@@ -33,8 +31,8 @@ export class ClientRepository implements IClientRespository {
     try {
       const result = await this.clientRepository
         .createQueryBuilder()
-        .update(Client)
-        .set({ is_active: STATUS_CLIENT.INCATIVE })
+        .update(Admin)
+        .set({ is_active: STATUS_ADMIN.INCATIVE })
         .where("id = :id", { id })
         .execute();
       if (!result) {
@@ -44,11 +42,11 @@ export class ClientRepository implements IClientRespository {
       new AppError(error);
     }
   }
-  public async listById(id: string): Promise<IClient> {
+  public async listById(id: string): Promise<IAdmin> {
     try {
       const result = await this.clientRepository
-        .createQueryBuilder(Client, "client")
-        .where("client.id = :id", { id })
+        .createQueryBuilder(Admin, "admin")
+        .where("admin.id = :id", { id })
         .getOne();
       if (!result) {
         new AppError("nao achou");

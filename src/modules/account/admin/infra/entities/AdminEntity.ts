@@ -1,7 +1,7 @@
 import { Entity, Column, PrimaryColumn } from "typeorm";
 
 @Entity()
-export class Client {
+export class Admin {
   @PrimaryColumn()
   id: string;
 
@@ -9,16 +9,10 @@ export class Client {
   name: string;
 
   @Column()
-  cpf: string;
-
-  @Column()
   email: string;
 
   @Column()
   password: string;
-
-  @Column()
-  telephone: string;
 
   @Column()
   is_active: string;
