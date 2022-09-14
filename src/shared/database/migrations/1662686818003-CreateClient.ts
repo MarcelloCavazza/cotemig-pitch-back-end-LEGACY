@@ -13,7 +13,7 @@ export class CreateClient1662686818003 implements MigrationInterface {
             isPrimary: true,
           },
           {
-            name: "status",
+            name: "is_active",
             type: "enum",
             enum: ["active", "inactive"],
             isNullable: false,

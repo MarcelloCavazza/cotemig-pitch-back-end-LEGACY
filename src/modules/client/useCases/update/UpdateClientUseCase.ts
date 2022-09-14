@@ -6,7 +6,7 @@ export class UpdateClientUseCase {
   private client = new Client();
   private repository = new ClientRepository();
   public async updateById(data: IRecieveUpdateClientData): Promise<void> {
-    const { id, cpf, email, name, password, status, telephone } = data;
+    const { id, cpf, email, name, password, is_active, telephone } = data;
     Object.assign(this.client, {
       id,
       updated_at: formatDate(new Date().toISOString()),
@@ -31,9 +31,9 @@ export class UpdateClientUseCase {
         password,
       });
     }
-    if (status) {
+    if (is_active) {
       Object.assign(this.client, {
-        status,
+        is_active,
       });
     }
     if (telephone) {

@@ -16,7 +16,7 @@ export class CreateClientUseCase {
       id: uuid(),
       cpf,
       email,
-      status: STATUS_CLIENT.ACTIVE,
+      is_active: STATUS_CLIENT.ACTIVE,
       name,
       password,
       telephone,
