@@ -1,4 +1,5 @@
 import { Router } from "express";
+import { checkToken } from "../../../../../shared/http/middleware/auth/auth";
 import { CreateLawyerController } from "../../useCases/create/CreateLawyerController";
 import { ListLawyerController } from "../../useCases/list/ListLawyerController";
 import { UpdateLawyerController } from "../../useCases/update/UpdateLawyerController";
@@ -12,9 +13,9 @@ lawyer.get("/status", (req, res) => {
   res.status(200).json({ status: "ok" });
 });
 
-lawyer.post("/create", createController.create);
-lawyer.get("/listby/:id", listController.listById);
-lawyer.patch("/updateby/:id", updateController.updateById);
-lawyer.delete("/deleteby/:id", updateController.deleteById);
+lawyer.post("/create", checkToken, createController.create);
+lawyer.get("/listby/:id", checkToken, listController.listById);
+lawyer.patch("/updateby/:id", checkToken, updateController.updateById);
+lawyer.delete("/deleteby/:id", checkToken, updateController.deleteById);
 
 export { lawyer };
