@@ -34,7 +34,7 @@ export class ClientRepository implements IClientRespository {
       const result = await this.clientRepository
         .createQueryBuilder()
         .update(Client)
-        .set({ status: STATUS_CLIENT.INCATIVE })
+        .set({ is_active: STATUS_CLIENT.INCATIVE })
         .where("id = :id", { id })
         .execute();
       if (!result) {
