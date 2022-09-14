@@ -2,8 +2,8 @@ import { Client, STATUS_CLIENT } from "../../domain/Client";
 import { IRecieveCreateClientData } from "../../dto/ClientDTO";
 import { v4 as uuid } from "uuid";
 import { ClientRepository } from "../../repositories/ClientRepository";
-import { formatDate } from "../../../../shared/utils/formatDate";
-import { AppError } from "../../../../shared/mainError/mainErrorClass";
+import { formatDate } from "../../../../../shared/utils/formatDate";
+import { AppError } from "../../../../../shared/mainError/mainErrorClass";
 
 export class CreateClientUseCase {
   private client = new Client();

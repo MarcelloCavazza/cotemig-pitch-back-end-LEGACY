@@ -1,7 +1,7 @@
 import { IRecieveUpdateClientData } from "../../dto/ClientDTO";
 import { Client } from "../../domain/Client";
-import { formatDate } from "../../../../shared/utils/formatDate";
 import { ClientRepository } from "../../repositories/ClientRepository";
+import { formatDate } from "../../../../../shared/utils/formatDate";
 export class UpdateClientUseCase {
   private client = new Client();
   private repository = new ClientRepository();

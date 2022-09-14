@@ -2,8 +2,8 @@ import { Lawyer, STATUS_LAWYER } from "../../domain/Lawyer";
 import { IRecieveCreateLawyerData } from "../../dto/LawyerDTO";
 import { v4 as uuid } from "uuid";
 import { LawyerRepository } from "../../repositories/LawyerRepository";
-import { formatDate } from "../../../../shared/utils/formatDate";
-import { AppError } from "../../../../shared/mainError/mainErrorClass";
+import { formatDate } from "../../../../../shared/utils/formatDate";
+import { AppError } from "../../../../../shared/mainError/mainErrorClass";
 
 export class CreateLawyerUseCase {
   private client = new Lawyer();
