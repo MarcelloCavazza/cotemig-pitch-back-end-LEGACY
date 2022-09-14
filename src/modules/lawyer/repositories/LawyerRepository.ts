@@ -1,24 +1,24 @@
 import { AppDataSource } from "../../../shared/database/data-source";
 import { AppError } from "../../../shared/mainError/mainErrorClass";
-import { STATUS_CLIENT } from "../domain/Lawyer";
-import { IClient } from "../dto/ClientDTO";
-import { Client } from "../infra/entities/ClientEntity";
-import { IClientRespository } from "./IClientRepository";
+import { STATUS_LAWYER } from "../domain/Lawyer";
+import { ILawyer } from "../dto/LawyerDTO";
+import { Lawyer } from "../infra/entities/LawyerEntity";
+import { ILawyerRepository } from "./ILawyerRepository";
 
-export class ClientRepository implements IClientRespository {
+export class LawyerRepository implements ILawyerRepository {
   private clientRepository = AppDataSource.manager;
 
-  public async create(data: IClient) {
+  public async create(data: ILawyer) {
     await this.clientRepository.save(
-      this.clientRepository.create(Client, data)
+      this.clientRepository.create(Lawyer, data)
     );
   }
-  public async update(data: IClient): Promise<void> {
+  public async update(data: ILawyer): Promise<void> {
     const { id, ...params } = data;
     try {
       const result = await this.clientRepository
         .createQueryBuilder()
-        .update(Client)
+        .update(Lawyer)
         .set(params)
         .where("id = :id", { id })
         .execute();
@@ -33,8 +33,8 @@ export class ClientRepository implements IClientRespository {
     try {
       const result = await this.clientRepository
         .createQueryBuilder()
-        .update(Client)
-        .set({ status: STATUS_CLIENT.INCATIVE })
+        .update(Lawyer)
+        .set({ is_active: STATUS_LAWYER.INCATIVE })
         .where("id = :id", { id })
         .execute();
       if (!result) {
@@ -44,11 +44,11 @@ export class ClientRepository implements IClientRespository {
       new AppError(error);
     }
   }
-  public async listById(id: string): Promise<IClient> {
+  public async listById(id: string): Promise<ILawyer> {
     try {
       const result = await this.clientRepository
-        .createQueryBuilder(Client, "client")
-        .where("client.id = :id", { id })
+        .createQueryBuilder(Lawyer, "lawyer")
+        .where("lawyer.id = :id", { id })
         .getOne();
       if (!result) {
         new AppError("nao achou");

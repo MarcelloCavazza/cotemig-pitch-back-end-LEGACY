@@ -6,6 +6,9 @@ export enum STATUS_LAWYER {
 export class Lawyer {
   public id: string;
   public is_active: string;
+  public oab_number: string;
+  public seccional: string;
+  public inscrition_type: string;
   public name: string;
   public cpf: string;
   public email: string;

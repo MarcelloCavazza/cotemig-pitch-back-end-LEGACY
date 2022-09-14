@@ -1,12 +1,21 @@
 import { Entity, Column, PrimaryColumn } from "typeorm";
 
 @Entity()
-export class Client {
+export class Lawyer {
   @PrimaryColumn()
   id: string;
 
   @Column()
   name: string;
+
+  @Column()
+  seccional: string;
+
+  @Column()
+  inscrition_type: string;
+
+  @Column()
+  oab_number: string;
 
   @Column()
   cpf: string;
@@ -21,7 +30,7 @@ export class Client {
   telephone: string;
 
   @Column()
-  status: string;
+  is_active: string;
 
   @Column()
   created_at: string;
