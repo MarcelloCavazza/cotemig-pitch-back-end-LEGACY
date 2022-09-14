@@ -21,7 +21,7 @@ export class Client {
   telephone: string;
 
   @Column()
-  status: string;
+  is_active: string;
 
   @Column()
   created_at: string;
