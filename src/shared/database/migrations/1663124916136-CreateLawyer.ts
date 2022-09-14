@@ -23,7 +23,6 @@ export class CreateLawyer1663124916136 implements MigrationInterface {
             type: "enum",
             enum: ["ADV", "EST", "SUP", "Todas"],
             isNullable: false,
-            default: "Todas",
           },
           {
             name: "seccional",
@@ -59,7 +58,6 @@ export class CreateLawyer1663124916136 implements MigrationInterface {
               "Todas",
             ],
             isNullable: false,
-            default: "Todas",
           },
           {
             name: "oab_number",

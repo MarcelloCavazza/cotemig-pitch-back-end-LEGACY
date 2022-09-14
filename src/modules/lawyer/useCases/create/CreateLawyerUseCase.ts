@@ -37,10 +37,18 @@ export class CreateLawyerUseCase {
       Object.assign(this.client, {
         seccional,
       });
+    } else {
+      Object.assign(this.client, {
+        seccional: "Todas",
+      });
     }
     if (inscrition_type) {
       Object.assign(this.client, {
         inscrition_type,
+      });
+    } else {
+      Object.assign(this.client, {
+        inscrition_type: "Todas",
       });
     }
 
