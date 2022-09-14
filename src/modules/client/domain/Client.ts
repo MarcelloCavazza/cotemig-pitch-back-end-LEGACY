@@ -5,7 +5,7 @@ export enum STATUS_CLIENT {
 
 export class Client {
   public id: string;
-  public status: string;
+  public is_active: string;
   public name: string;
   public cpf: string;
   public email: string;

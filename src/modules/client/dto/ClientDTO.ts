@@ -8,7 +8,7 @@ export interface IRecieveCreateClientData {
 
 export interface IClient {
   id: string;
-  status: string;
+  is_active: string;
   name: string;
   cpf: string;
   email: string;
@@ -20,7 +20,7 @@ export interface IClient {
 
 export interface IRecieveUpdateClientData {
   id: string;
-  status?: string;
+  is_active?: string;
   name?: string;
   cpf?: string;
   email?: string;
