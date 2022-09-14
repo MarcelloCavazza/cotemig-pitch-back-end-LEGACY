@@ -4,12 +4,12 @@ import { UpdateClientUseCase } from "./UpdateClientUseCase";
 export class UpdateClientController {
   public async updateById(request: Request, response: Response) {
     const { id } = request.params;
-    const { status, name, cpf, email, password, telephone } = request.body;
+    const { is_active, name, cpf, email, password, telephone } = request.body;
     const updateUseCase = new UpdateClientUseCase();
 
     await updateUseCase.updateById({
       id,
-      status,
+      is_active,
       name,
       cpf,
       email,
