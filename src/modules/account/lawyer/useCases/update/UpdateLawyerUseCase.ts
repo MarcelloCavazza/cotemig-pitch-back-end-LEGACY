@@ -1,12 +1,21 @@
-import { IRecieveUpdateClientData } from "../../dto/ClientDTO";
-import { Client } from "../../domain/Client";
-import { formatDate } from "../../../../shared/utils/formatDate";
-import { ClientRepository } from "../../repositories/ClientRepository";
-export class UpdateClientUseCase {
-  private client = new Client();
-  private repository = new ClientRepository();
-  public async updateById(data: IRecieveUpdateClientData): Promise<void> {
-    const { id, cpf, email, name, password, is_active, telephone } = data;
+import { IRecieveUpdateLawyerData } from "../../dto/LawyerDTO";
+import { Lawyer } from "../../domain/Lawyer";
+import { LawyerRepository } from "../../repositories/LawyerRepository";
+import { formatDate } from "../../../../../shared/utils/formatDate";
+export class UpdateLawyerUseCase {
+  private client = new Lawyer();
+  private repository = new LawyerRepository();
+  public async updateById(data: IRecieveUpdateLawyerData): Promise<void> {
+    const {
+      id,
+      cpf,
+      email,
+      name,
+      password,
+      is_active,
+      telephone,
+      inscrition_type,
+    } = data;
     Object.assign(this.client, {
       id,
       updated_at: formatDate(new Date().toISOString()),
@@ -29,6 +38,11 @@ export class UpdateClientUseCase {
     if (password) {
       Object.assign(this.client, {
         password,
+      });
+    }
+    if (inscrition_type) {
+      Object.assign(this.client, {
+        inscrition_type,
       });
     }
     if (is_active) {

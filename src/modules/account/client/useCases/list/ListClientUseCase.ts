@@ -1,4 +1,4 @@
-import { AppError } from "../../../../shared/mainError/mainErrorClass";
+import { AppError } from "../../../../../shared/mainError/mainErrorClass";
 import { Client } from "../../domain/Client";
 import { ClientRepository } from "../../repositories/ClientRepository";
 
