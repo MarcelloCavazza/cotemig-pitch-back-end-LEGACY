@@ -1,5 +1,4 @@
 import { Router } from "express";
-import { checkToken } from "../../../../shared/http/middleware/auth/auth";
 import { CreateAuthController } from "../../useCases/create/CreateAuthController";
 import { ListAuthController } from "../../useCases/list/ListAuthController";
 import { UpdateAuthController } from "../../useCases/update/UpdateAuthController";

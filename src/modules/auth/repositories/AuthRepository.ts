@@ -1,6 +1,5 @@
-import { type } from "os";
-import { AppDataSource } from "../../../shared/database/data-source";
-import { AppError } from "../../../shared/mainError/mainErrorClass";
+import { AppDataSource } from "@shared/database/data-source";
+import { AppError } from "@shared/mainError/mainErrorClass";
 import { STATUS_AUTH } from "../domain/auth";
 import { IAuth, IAuthUpdate } from "../dto/AuthDTO";
 import { Auth } from "../infra/entities/AuthEntity";

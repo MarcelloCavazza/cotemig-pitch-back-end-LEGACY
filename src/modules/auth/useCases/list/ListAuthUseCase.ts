@@ -1,4 +1,4 @@
-import { AppError } from "../../../../shared/mainError/mainErrorClass";
+import { AppError } from "@shared/mainError/mainErrorClass";
 import { Auth } from "../../domain/auth";
 import { AuthRepository } from "../../repositories/AuthRepository";
 import { hashSync, compareSync } from "bcrypt";
@@ -20,7 +20,8 @@ export class ListAuthUseCase {
 
   public async findUserByEmail(
     email: string,
-    password: string
+    password: string,
+    is_admin: boolean
   ): Promise<Auth | String> {
     try {
       let auth = await this.repository.findUserByEmail(email);
@@ -35,7 +36,7 @@ export class ListAuthUseCase {
       } else {
         console.log(auth);
         const newToken = new CreateAuthUseCase();
-        const newCreatedToken = newToken.createToken();
+        const newCreatedToken = newToken.createToken(is_admin);
         const updateUseCase = new UpdateAuthUseCase();
         await updateUseCase.updateById({
           id: auth.id,

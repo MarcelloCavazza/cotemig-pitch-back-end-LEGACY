@@ -11,10 +11,14 @@ export class ListAuthController {
   }
 
   public async auth(request: Request, response: Response) {
-    const { email, password } = request.body;
+    const { email, password, is_admin } = request.body;
 
     const listAuthUseCase = new ListAuthUseCase();
-    const admin = await listAuthUseCase.findUserByEmail(email, password);
+    const admin = await listAuthUseCase.findUserByEmail(
+      email,
+      password,
+      is_admin
+    );
     return response.status(200).json(admin);
   }
 }

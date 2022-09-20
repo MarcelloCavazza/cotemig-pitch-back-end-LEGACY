@@ -1,9 +1,9 @@
 import { Auth, STATUS_AUTH } from "../../domain/auth";
-import { IRecieveCreateAuthData } from "../../dto/AuthDTO";
+import { IAuth, IRecieveCreateAuthData } from "../../dto/AuthDTO";
 import { v4 as uuid } from "uuid";
 import { AuthRepository } from "../../repositories/AuthRepository";
-import { formatDate } from "../../../../shared/utils/formatDate";
-import { AppError } from "../../../../shared/mainError/mainErrorClass";
+import { formatDate } from "@shared/utils/formatDate";
+import { AppError } from "@shared/mainError/mainErrorClass";
 import { hashSync } from "bcrypt";
 import { sign } from "jsonwebtoken";
 import * as dotenv from "dotenv";
@@ -14,7 +14,7 @@ export class CreateAuthUseCase {
   private repository = new AuthRepository();
 
   public async create(data: IRecieveCreateAuthData): Promise<Auth | String> {
-    const { email, password } = data;
+    const { email, password, is_admin } = data;
     let emailExists = await this.repository.findUserByEmail(email);
     if (!emailExists) {
       this.auth.password = hashSync(password, 12);
@@ -22,7 +22,7 @@ export class CreateAuthUseCase {
 
       Object.assign(this.auth, {
         email,
-        token: this.createToken(),
+        token: this.createToken(is_admin),
         is_active: STATUS_AUTH.ACTIVE,
         created_at: formatDate(new Date().toISOString()),
       });
@@ -39,8 +39,12 @@ export class CreateAuthUseCase {
     return "email already exists";
   }
 
-  public createToken() {
-    return sign({}, process.env.SECRET_KEY, {
+  public createToken(is_admin: boolean) {
+    let secretKey = process.env.SECRET_KEY;
+    if (is_admin) {
+      secretKey = process.env.SECRET_KEY_ADMIN;
+    }
+    return sign({}, secretKey, {
       subject: String(this.auth.id),
       expiresIn: String(process.env.EXPIRATION_TIME),
     });

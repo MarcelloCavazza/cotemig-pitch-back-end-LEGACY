@@ -1,5 +1,6 @@
 export interface IRecieveCreateAuthData {
   email: string;
+  is_admin?: boolean;
   password: string;
 }
 
