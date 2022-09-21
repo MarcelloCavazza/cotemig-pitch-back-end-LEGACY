@@ -7,7 +7,7 @@ export const AppDataSource = new DataSource({
   migrationsTableName: "migrations",
   name: "default",
   type: "postgres",
-  host: "localhost",
+  host: process.env.TYPEORM_HOST,
   port: 5434,
   username: process.env.TYPEORM_USERNAME,
   password: process.env.TYPEORM_PASSWORD,
