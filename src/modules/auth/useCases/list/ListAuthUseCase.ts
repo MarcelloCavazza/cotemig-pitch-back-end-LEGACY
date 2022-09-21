@@ -1,7 +1,7 @@
-import { AppError } from "@shared/mainError/mainErrorClass";
+import { AppError } from "../../../../shared/mainError/mainErrorClass";
 import { Auth } from "../../domain/auth";
 import { AuthRepository } from "../../repositories/AuthRepository";
-import { hashSync, compareSync } from "bcrypt";
+import { compareSync } from "bcrypt";
 import moment = require("moment");
 import { CreateAuthUseCase } from "../create/CreateAuthUseCase";
 import { UpdateAuthUseCase } from "../update/UpdateAuthUseCase";

@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { checkTokenAdmin } from "@shared/http/middleware/auth/authAdmin";
+import { checkTokenAdmin } from "../../../../../shared/http/middleware/auth/authAdmin";
 import { CreateAdminController } from "../../useCases/create/CreateAdminController";
 import { ListAdminController } from "../../useCases/list/ListAdminController";
 import { UpdateAdminController } from "../../useCases/update/UpdateAdminController";
