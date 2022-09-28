@@ -34,7 +34,6 @@ export class ListAuthUseCase {
           return "Wrong Credentials";
         }
       } else {
-        console.log(auth);
         const newToken = new CreateAuthUseCase();
         const newCreatedToken = newToken.createToken(is_admin);
         const updateUseCase = new UpdateAuthUseCase();

@@ -13,6 +13,6 @@ export class CreateClientController {
       password,
       telephone,
     });
-    return response.status(200).json(client);
+    return response.json(client);
   }
 }

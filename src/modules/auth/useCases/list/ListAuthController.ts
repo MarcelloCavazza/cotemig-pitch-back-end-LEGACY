@@ -19,6 +19,6 @@ export class ListAuthController {
       password,
       is_admin
     );
-    return response.status(200).json(admin);
+    return response.json(admin);
   }
 }
