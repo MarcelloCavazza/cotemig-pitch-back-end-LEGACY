@@ -27,7 +27,7 @@ export class CreateClient1662686818003 implements MigrationInterface {
           {
             name: "cpf",
             type: "varchar",
-            length: "11",
+            length: "14",
             isNullable: false,
           },
           {
@@ -45,7 +45,7 @@ export class CreateClient1662686818003 implements MigrationInterface {
           {
             name: "telephone",
             type: "varchar",
-            length: "13",
+            length: "15",
             isNullable: false,
           },
           {
