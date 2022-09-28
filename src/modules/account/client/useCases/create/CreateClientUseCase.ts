@@ -10,10 +10,10 @@ export class CreateClientUseCase {
   private repository = new ClientRepository();
 
   public async create(data: IRecieveCreateClientData): Promise<Client> {
-    const { cpf, email, name, password, telephone } = data;
+    const { optionalId, cpf, email, name, password, telephone } = data;
 
     Object.assign(this.client, {
-      id: uuid(),
+      id: optionalId ? optionalId : uuid(),
       cpf,
       email,
       is_active: STATUS_CLIENT.ACTIVE,
