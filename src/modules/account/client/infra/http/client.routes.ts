@@ -15,7 +15,7 @@ const listController = new ListClientController();
 const updateController = new UpdateClientController();
 
 client.post("/create", checkToken, createController.create);
-client.get("/listby/:id", checkToken, listController.listById);
+client.get("/listby/:id", listController.listById);
 client.patch("/updateby/:id", checkToken, updateController.updateById);
 client.delete("/deleteby/:id", checkToken, updateController.deleteById);
 

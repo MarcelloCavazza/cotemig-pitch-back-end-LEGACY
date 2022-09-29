@@ -15,7 +15,7 @@ const listController = new ListAdminController();
 const updateController = new UpdateAdminController();
 
 admin.post("/create", checkTokenAdmin, createController.create);
-admin.get("/listby/:id", checkTokenAdmin, listController.listById);
+admin.get("/listby/:id", listController.listById);
 admin.patch("/updateby/:id", checkTokenAdmin, updateController.updateById);
 admin.delete("/deleteby/:id", checkTokenAdmin, updateController.deleteById);
 
