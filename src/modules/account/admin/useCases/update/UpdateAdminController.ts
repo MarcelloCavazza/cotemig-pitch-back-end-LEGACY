@@ -4,7 +4,7 @@ import { UpdateAdminUseCase } from "./UpdateAdminUseCase";
 export class UpdateAdminController {
   public async updateById(request: Request, response: Response) {
     const { id } = request.params;
-    const { is_active, name, cpf, email, password, telephone } = request.body;
+    const { is_active, name, email, password } = request.body;
     const updateUseCase = new UpdateAdminUseCase();
 
     await updateUseCase.updateById({
