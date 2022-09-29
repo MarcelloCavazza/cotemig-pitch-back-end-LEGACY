@@ -7,6 +7,7 @@ export interface IRecieveCreateAuthData {
 export interface IAuth {
   id: string;
   is_active: string;
+  is_admin: string;
   email: string;
   token: string;
   password: string;
@@ -17,6 +18,7 @@ export interface IAuth {
 export interface IAuthUpdate {
   id?: string;
   is_active?: string;
+  is_admin?: string;
   email?: string;
   token?: string;
   password?: string;
@@ -27,6 +29,7 @@ export interface IRecieveUpdateAuthData {
   id: string;
   is_active?: string;
   email?: string;
+  is_admin?: string;
   token?: string;
   password?: string;
 }

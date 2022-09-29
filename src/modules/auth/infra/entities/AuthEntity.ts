@@ -12,6 +12,9 @@ export class Auth {
   email: string;
 
   @Column()
+  is_admin: string;
+
+  @Column()
   password: string;
 
   @Column()

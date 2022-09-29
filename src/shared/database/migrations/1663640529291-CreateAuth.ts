@@ -25,6 +25,13 @@ export class CreateAuth1663640529291 implements MigrationInterface {
             isNullable: false,
           },
           {
+            name: "is_admin",
+            type: "varchar",
+            length: "5",
+            isNullable: false,
+            default: "false",
+          },
+          {
             name: "email",
             type: "varchar",
             length: "150",
