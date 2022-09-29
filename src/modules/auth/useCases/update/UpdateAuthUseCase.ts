@@ -3,6 +3,8 @@ import { Auth } from "../../domain/auth";
 import { AuthRepository } from "../../repositories/AuthRepository";
 import { formatDate } from "../../../../shared/utils/formatDate";
 import { AppError } from "../../../../shared/mainError/mainErrorClass";
+import { hashSync } from "bcrypt";
+
 export class UpdateAuthUseCase {
   private auth = new Auth();
   private repository = new AuthRepository();
@@ -24,7 +26,7 @@ export class UpdateAuthUseCase {
     }
     if (password) {
       Object.assign(this.auth, {
-        password,
+        password: hashSync(password, 12),
       });
     }
     if (is_active) {

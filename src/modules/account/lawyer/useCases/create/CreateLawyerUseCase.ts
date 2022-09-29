@@ -3,6 +3,7 @@ import { IRecieveCreateLawyerData } from "../../dto/LawyerDTO";
 import { v4 as uuid } from "uuid";
 import { LawyerRepository } from "../../repositories/LawyerRepository";
 import { formatDate } from "../../../../../shared/utils/formatDate";
+import { hashSync } from "bcrypt";
 import { AppError } from "../../../../../shared/mainError/mainErrorClass";
 
 export class CreateLawyerUseCase {
@@ -11,6 +12,7 @@ export class CreateLawyerUseCase {
 
   public async create(data: IRecieveCreateLawyerData): Promise<Lawyer> {
     const {
+      optionalId,
       cpf,
       email,
       name,
@@ -22,13 +24,13 @@ export class CreateLawyerUseCase {
     } = data;
 
     Object.assign(this.client, {
-      id: uuid(),
+      id: optionalId ? optionalId : uuid(),
       cpf,
       email,
       oab_number,
       is_active: STATUS_LAWYER.ACTIVE,
       name,
-      password,
+      password: hashSync(password, 12),
       telephone,
       created_at: formatDate(new Date().toISOString()),
     });

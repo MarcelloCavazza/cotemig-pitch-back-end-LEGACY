@@ -2,6 +2,8 @@ import { IRecieveUpdateLawyerData } from "../../dto/LawyerDTO";
 import { Lawyer } from "../../domain/Lawyer";
 import { LawyerRepository } from "../../repositories/LawyerRepository";
 import { formatDate } from "../../../../../shared/utils/formatDate";
+import { hashSync } from "bcrypt";
+
 export class UpdateLawyerUseCase {
   private client = new Lawyer();
   private repository = new LawyerRepository();
@@ -37,7 +39,7 @@ export class UpdateLawyerUseCase {
     }
     if (password) {
       Object.assign(this.client, {
-        password,
+        password: hashSync(password, 12),
       });
     }
     if (inscrition_type) {

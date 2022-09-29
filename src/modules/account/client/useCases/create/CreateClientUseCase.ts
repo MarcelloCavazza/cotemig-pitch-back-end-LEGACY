@@ -1,5 +1,6 @@
 import { Client, STATUS_CLIENT } from "../../domain/Client";
 import { IRecieveCreateClientData } from "../../dto/ClientDTO";
+import { hashSync } from "bcrypt";
 import { v4 as uuid } from "uuid";
 import { ClientRepository } from "../../repositories/ClientRepository";
 import { formatDate } from "../../../../../shared/utils/formatDate";
@@ -18,7 +19,7 @@ export class CreateClientUseCase {
       email,
       is_active: STATUS_CLIENT.ACTIVE,
       name,
-      password,
+      password: hashSync(password, 12),
       telephone,
       created_at: formatDate(new Date().toISOString()),
     });

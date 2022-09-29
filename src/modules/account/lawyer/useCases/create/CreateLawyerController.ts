@@ -4,6 +4,7 @@ import { CreateLawyerUseCase } from "./CreateLawyerUseCase";
 export class CreateLawyerController {
   public async create(request: Request, response: Response): Promise<Response> {
     const {
+      optionalId,
       name,
       cpf,
       email,
@@ -16,6 +17,7 @@ export class CreateLawyerController {
 
     const createLawyerUseCase = new CreateLawyerUseCase();
     const client = await createLawyerUseCase.create({
+      optionalId,
       name,
       cpf,
       email,

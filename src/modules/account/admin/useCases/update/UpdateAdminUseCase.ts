@@ -1,5 +1,6 @@
 import { IRecieveUpdateAdminData } from "../../dto/AdminDTO";
 import { Admin } from "../../domain/Admin";
+import { hashSync } from "bcrypt";
 import { AdminRepository } from "../../repositories/AdminRepository";
 import { formatDate } from "../../../../../shared/utils/formatDate";
 export class UpdateAdminUseCase {
@@ -23,7 +24,7 @@ export class UpdateAdminUseCase {
     }
     if (password) {
       Object.assign(this.admin, {
-        password,
+        password: hashSync(password, 12),
       });
     }
     if (is_active) {

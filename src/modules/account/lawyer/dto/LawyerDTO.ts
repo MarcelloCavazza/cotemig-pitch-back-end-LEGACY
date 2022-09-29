@@ -3,6 +3,7 @@ export interface IRecieveCreateLawyerData {
   cpf: string;
   seccional: string;
   email: string;
+  optionalId?: string;
   oab_number: string;
   password: string;
   inscrition_type: string;

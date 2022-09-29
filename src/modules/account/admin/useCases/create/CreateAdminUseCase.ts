@@ -1,6 +1,7 @@
 import { Admin, STATUS_ADMIN } from "../../domain/Admin";
 import { IRecieveCreateAdminData } from "../../dto/AdminDTO";
 import { v4 as uuid } from "uuid";
+import { hashSync } from "bcrypt";
 import { AdminRepository } from "../../repositories/AdminRepository";
 import { formatDate } from "../../../../../shared/utils/formatDate";
 import { AppError } from "../../../../../shared/mainError/mainErrorClass";
@@ -17,7 +18,7 @@ export class CreateAdminUseCase {
       email,
       is_active: STATUS_ADMIN.ACTIVE,
       name,
-      password,
+      password: hashSync(password, 12),
       created_at: formatDate(new Date().toISOString()),
     });
 
