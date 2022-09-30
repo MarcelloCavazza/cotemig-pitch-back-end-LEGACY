@@ -22,7 +22,7 @@ export class CreateAuthUseCase {
 
       Object.assign(this.auth, {
         email,
-        is_admin: `${is_admin}`,
+        is_admin: `${is_admin == undefined ? "false" : "true"}`,
         token: this.createToken(is_admin),
         is_active: STATUS_AUTH.ACTIVE,
         created_at: formatDate(new Date().toISOString()),
