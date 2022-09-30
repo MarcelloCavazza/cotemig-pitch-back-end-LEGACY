@@ -25,25 +25,33 @@ export class ListAuthUseCase {
   ): Promise<Auth | String> {
     try {
       let auth = await this.repository.findUserByEmail(email);
-      const isExpired = this.isExpired(auth.created_at);
-      if (!isExpired) {
-        const result = compareSync(password, auth.password);
-        if (result) {
-          return auth;
+      if (auth) {
+        const isExpired = this.isExpired(auth.created_at);
+        if (!isExpired) {
+          const result = compareSync(password, auth.password);
+          if (result) {
+            return auth;
+          } else {
+            return "Wrong Credentials";
+          }
         } else {
-          return "Wrong Credentials";
+          const newToken = new CreateAuthUseCase();
+          const newCreatedToken = newToken.createToken(is_admin);
+          const updateUseCase = new UpdateAuthUseCase();
+          await updateUseCase.updateById({
+            id: auth.id,
+            token: newCreatedToken,
+          });
+          let updatedAuth = await this.repository.findUserByEmail(email);
+          const result = compareSync(password, auth.password);
+          if (result) {
+            return updatedAuth;
+          } else {
+            return "Wrong Credentials";
+          }
         }
-      } else {
-        const newToken = new CreateAuthUseCase();
-        const newCreatedToken = newToken.createToken(is_admin);
-        const updateUseCase = new UpdateAuthUseCase();
-        await updateUseCase.updateById({
-          id: auth.id,
-          token: newCreatedToken,
-        });
-        let updatedAuth = await this.repository.findUserByEmail(email);
-        return updatedAuth;
       }
+      new AppError("sem conta");
     } catch (error) {
       new AppError(error);
     }
