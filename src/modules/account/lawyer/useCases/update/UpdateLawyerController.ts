@@ -26,7 +26,7 @@ export class UpdateLawyerController {
       telephone,
     });
 
-    return response.status(200).json("Lawyer updated");
+    return response.json("Lawyer updated");
   }
   public async deleteById(request: Request, response: Response) {
     const { id } = request.params;
@@ -34,6 +34,6 @@ export class UpdateLawyerController {
 
     await updateUseCase.deleteById(id);
 
-    return response.status(200).json("Lawyer deleted");
+    return response.json("Lawyer deleted");
   }
 }

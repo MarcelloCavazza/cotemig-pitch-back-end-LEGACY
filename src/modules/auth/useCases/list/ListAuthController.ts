@@ -7,7 +7,7 @@ export class ListAuthController {
 
     const listAuthUseCase = new ListAuthUseCase();
     const admin = await listAuthUseCase.listById(id);
-    return response.status(200).json(admin);
+    return response.json(admin);
   }
 
   public async auth(request: Request, response: Response) {

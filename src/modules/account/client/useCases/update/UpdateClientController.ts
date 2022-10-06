@@ -17,7 +17,7 @@ export class UpdateClientController {
       telephone,
     });
 
-    return response.status(200).json("User updated");
+    return response.json("User updated");
   }
   public async deleteById(request: Request, response: Response) {
     const { id } = request.params;
@@ -25,6 +25,6 @@ export class UpdateClientController {
 
     await updateUseCase.deleteById(id);
 
-    return response.status(200).json("User deleted");
+    return response.json("User deleted");
   }
 }

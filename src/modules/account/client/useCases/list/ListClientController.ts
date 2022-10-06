@@ -7,6 +7,6 @@ export class ListClientController {
 
     const listClientUseCase = new ListClientUseCase();
     const client = await listClientUseCase.listById(id);
-    return response.status(200).json(client);
+    return response.json(client);
   }
 }
