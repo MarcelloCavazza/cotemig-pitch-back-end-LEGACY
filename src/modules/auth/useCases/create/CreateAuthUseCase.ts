@@ -41,7 +41,7 @@ export class CreateAuthUseCase {
   }
 
   public createToken(is_admin: boolean) {
-    let secretKey = process.env.SECRET_KEY_DEFAULT_USER;
+    let secretKey = process.env.SECRET_KEY_USER;
     if (is_admin) {
       secretKey = process.env.SECRET_KEY_ADMIN;
     }
