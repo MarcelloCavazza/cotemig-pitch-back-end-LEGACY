@@ -13,7 +13,7 @@ lawyer.get("/status", (req, res) => {
   res.status(200).json({ status: "ok" });
 });
 
-lawyer.post("/create", checkToken, createController.create);
+lawyer.post("/create", createController.create);
 lawyer.get("/listby/:id", checkToken, listController.listById);
 lawyer.patch("/updateby/:id", checkToken, updateController.updateById);
 lawyer.delete("/deleteby/:id", checkToken, updateController.deleteById);
