@@ -75,8 +75,8 @@ export class ChatRepository implements IChatRespository {
   public async listById(id: string): Promise<IChat | boolean> {
     try {
       const result = await this.chatRepository
-        .createQueryBuilder(Chat, "auth")
-        .where("auth.id = :id", { id })
+        .createQueryBuilder(Chat, "chat")
+        .where("chat.id = :id AND chat.is_active = 'active'", { id })
         .getOne();
       if (!result) {
         return false;
@@ -90,7 +90,7 @@ export class ChatRepository implements IChatRespository {
     try {
       const result = await this.chatRepository
         .createQueryBuilder(Chat, "chat")
-        .where("chat.room_name = :room_name AND auth.is_active = 'active'", {
+        .where("chat.room_name = :room_name AND chat.is_active = 'active'", {
           room_name,
         })
         .getOne();
