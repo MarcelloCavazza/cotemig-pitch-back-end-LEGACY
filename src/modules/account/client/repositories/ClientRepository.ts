@@ -44,14 +44,14 @@ export class ClientRepository implements IClientRespository {
       new AppError(error);
     }
   }
-  public async listById(id: string): Promise<IClient> {
+  public async listById(id: string): Promise<IClient | boolean> {
     try {
       const result = await this.clientRepository
         .createQueryBuilder(Client, "client")
-        .where("client.id = :id", { id })
+        .where("client.id = :id AND client.is_active = 'active'", { id })
         .getOne();
       if (!result) {
-        new AppError("nao achou");
+        return false;
       }
       return result;
     } catch (error) {

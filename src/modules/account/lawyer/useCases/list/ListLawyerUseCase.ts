@@ -5,12 +5,12 @@ import { LawyerRepository } from "../../repositories/LawyerRepository";
 export class ListLawyerUseCase {
   private repository = new LawyerRepository();
 
-  public async listById(id: string): Promise<Lawyer> {
+  public async listById(id: string): Promise<Lawyer | boolean> {
     try {
       const lawyer = await this.repository.listById(id);
       return lawyer;
     } catch (error) {
-      new AppError(error);
+      return false;
     }
   }
 }

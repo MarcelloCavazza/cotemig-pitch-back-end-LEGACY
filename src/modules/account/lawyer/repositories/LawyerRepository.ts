@@ -44,18 +44,18 @@ export class LawyerRepository implements ILawyerRepository {
       new AppError(error);
     }
   }
-  public async listById(id: string): Promise<ILawyer> {
+  public async listById(id: string): Promise<ILawyer | boolean> {
     try {
       const result = await this.clientRepository
         .createQueryBuilder(Lawyer, "lawyer")
-        .where("lawyer.id = :id", { id })
+        .where("lawyer.id = :id AND lawyer.is_active = 'active'", { id })
         .getOne();
       if (!result) {
-        new AppError("nao achou");
+        return false;
       }
       return result;
     } catch (error) {
-      new AppError(error);
+      return false;
     }
   }
 }
