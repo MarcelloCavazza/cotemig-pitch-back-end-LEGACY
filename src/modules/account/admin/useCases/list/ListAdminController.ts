@@ -7,6 +7,6 @@ export class ListAdminController {
 
     const listAdminUseCase = new ListAdminUseCase();
     const admin = await listAdminUseCase.listById(id);
-    return response.status(200).json(admin);
+    return response.json(admin);
   }
 }

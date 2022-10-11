@@ -11,6 +11,6 @@ export class CreateAdminController {
       email,
       password,
     });
-    return response.status(200).json(admin);
+    return response.json(admin);
   }
 }

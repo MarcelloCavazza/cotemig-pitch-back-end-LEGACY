@@ -15,7 +15,7 @@ export class UpdateAdminController {
       password,
     });
 
-    return response.status(200).json("Admin updated");
+    return response.json("Admin updated");
   }
   public async deleteById(request: Request, response: Response) {
     const { id } = request.params;
@@ -23,6 +23,6 @@ export class UpdateAdminController {
 
     await updateUseCase.deleteById(id);
 
-    return response.status(200).json("Admin deleted");
+    return response.json("Admin deleted");
   }
 }

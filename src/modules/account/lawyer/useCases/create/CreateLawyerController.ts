@@ -27,6 +27,6 @@ export class CreateLawyerController {
       seccional,
       oab_number,
     });
-    return response.status(200).json(client);
+    return response.json(client);
   }
 }

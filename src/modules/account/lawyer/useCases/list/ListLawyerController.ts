@@ -7,6 +7,6 @@ export class ListLawyerController {
 
     const listLawyerUseCase = new ListLawyerUseCase();
     const lawyer = await listLawyerUseCase.listById(id);
-    return response.status(200).json(lawyer);
+    return response.json(lawyer);
   }
 }

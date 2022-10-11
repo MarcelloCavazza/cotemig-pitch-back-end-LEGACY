@@ -15,7 +15,7 @@ export class UpdateAuthController {
       password,
     });
 
-    return response.status(200).json("Auth updated");
+    return response.json("Auth updated");
   }
   public async deleteById(request: Request, response: Response) {
     const { id } = request.params;
@@ -23,6 +23,6 @@ export class UpdateAuthController {
 
     await updateUseCase.deleteById(id);
 
-    return response.status(200).json("Auth deleted");
+    return response.json("Auth deleted");
   }
 }

@@ -17,7 +17,7 @@ const checkToken = (
 
   try {
     const [, token] = authToken.split(" ");
-    verify(token, process.env.SECRET_KEY);
+    verify(token, process.env.SECRET_KEY_USER);
     next();
   } catch (error) {
     throw new AppError("Invalid Token", 403);

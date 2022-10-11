@@ -11,6 +11,6 @@ export class CreateAuthController {
       is_admin,
       password,
     });
-    return response.status(200).json(admin);
+    return response.json(admin);
   }
 }
