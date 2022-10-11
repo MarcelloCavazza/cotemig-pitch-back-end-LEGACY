@@ -35,7 +35,6 @@ export class CreateChatUseCase {
           is_active: STATUS_CHAT.ACTIVE,
           created_at: formatDate(new Date().toISOString()),
         });
-        console.log(this.chat);
         try {
           await this.repositoryChat.create(this.chat);
         } catch (error) {
