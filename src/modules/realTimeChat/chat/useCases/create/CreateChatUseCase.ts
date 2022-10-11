@@ -21,14 +21,17 @@ export class CreateChatUseCase {
     const { room_name, clientId, lawyerId } = data;
     const clientExists = await this.repositoryClient.listById(clientId);
     const lawyerExists = await this.repositoryLawyer.listById(lawyerId);
+
     if (clientExists && lawyerExists) {
       const roomExists = await this.repositoryChat.findRoomByName(room_name);
+
       if (!roomExists) {
         this.chat.id = uuid();
 
         Object.assign(this.chat, {
           clientId,
           lawyerId,
+          room_name,
           is_active: STATUS_CHAT.ACTIVE,
           created_at: formatDate(new Date().toISOString()),
         });
@@ -36,6 +39,7 @@ export class CreateChatUseCase {
         try {
           await this.repositoryChat.create(this.chat);
         } catch (error) {
+          console.log(error);
           return "erro ao criar o chat";
         }
 

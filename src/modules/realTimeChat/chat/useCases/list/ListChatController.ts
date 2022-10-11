@@ -6,19 +6,22 @@ export class ListChatController {
     const { id } = request.params;
 
     const listChatUseCase = new ListChatUseCase();
-    const admin = await listChatUseCase.listById(id);
-    return response.json(admin);
+    const chat = await listChatUseCase.listById(id);
+    return response.json(chat);
   }
 
-  public async auth(request: Request, response: Response) {
-    const { email, password, is_admin } = request.body;
+  public async listbyclient(request: Request, response: Response) {
+    const { id } = request.params;
 
     const listChatUseCase = new ListChatUseCase();
-    const admin = await listChatUseCase.findUserByEmail(
-      email,
-      password,
-      is_admin
-    );
-    return response.json(admin);
+    const chat = await listChatUseCase.listbyclient(id);
+    return response.json(chat);
+  }
+  public async listbylawyer(request: Request, response: Response) {
+    const { id } = request.params;
+
+    const listChatUseCase = new ListChatUseCase();
+    const chat = await listChatUseCase.listbylawyer(id);
+    return response.json(chat);
   }
 }

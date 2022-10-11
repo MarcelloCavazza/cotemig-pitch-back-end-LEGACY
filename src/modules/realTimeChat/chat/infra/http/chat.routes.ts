@@ -15,7 +15,8 @@ const updateController = new UpdateChatController();
 
 chat.post("/create", createController.create);
 chat.get("/listby/:id", listController.listById);
-chat.patch("/updateby/:id", updateController.updateById);
+chat.get("/listbyclient/:id", listController.listbyclient);
+chat.get("/listbylawyer/:id", listController.listbylawyer);
 chat.delete("/deleteby/:id", updateController.deleteById);
 
 export { chat };

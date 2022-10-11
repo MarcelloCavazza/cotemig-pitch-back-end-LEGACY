@@ -1,7 +1,7 @@
 import { Entity, Column, PrimaryColumn } from "typeorm";
 
 @Entity()
-export class ChatEntity {
+export class Chat {
   @PrimaryColumn()
   id: string;
 
@@ -13,9 +13,6 @@ export class ChatEntity {
 
   @Column()
   lawyerId: string;
-
-  @Column()
-  status: string;
 
   @Column()
   is_active: string;

@@ -2,25 +2,21 @@ import { AppDataSource } from "../../../../shared/database/data-source";
 import { AppError } from "../../../../shared/mainError/mainErrorClass";
 import { STATUS_CHAT } from "../domain/chat";
 import { IChat, IChatUpdate } from "../dto/ChatDTO";
-import { ChatEntity } from "../infra/entities/ChatEntity";
+import { Chat } from "../infra/entities/ChatEntity";
 import { IChatRespository } from "./IChatRepository";
 
 export class ChatRepository implements IChatRespository {
   private chatRepository = AppDataSource.manager;
 
   public async create(data: IChat) {
-    console.log(
-      await this.chatRepository.save(
-        this.chatRepository.create(ChatEntity, data)
-      )
-    );
+    await this.chatRepository.save(this.chatRepository.create(Chat, data));
   }
   public async update(data: IChat): Promise<IChatUpdate | any> {
     const { id, ...params } = data;
     try {
       const result = await this.chatRepository
         .createQueryBuilder()
-        .update(ChatEntity)
+        .update(Chat)
         .set(params)
         .where("id = :id", { id })
         .execute();
@@ -29,14 +25,14 @@ export class ChatRepository implements IChatRespository {
       }
       return result;
     } catch (error) {
-      new AppError(error);
+      return false;
     }
   }
   public async deleteById(id: string): Promise<void> {
     try {
       const result = await this.chatRepository
         .createQueryBuilder()
-        .update(ChatEntity)
+        .update(Chat)
         .set({ is_active: STATUS_CHAT.INCATIVE })
         .where("id = :id", { id })
         .execute();
@@ -47,24 +43,53 @@ export class ChatRepository implements IChatRespository {
       new AppError(error);
     }
   }
-  public async listById(id: string): Promise<IChat> {
+  public async listbyclient(id: string): Promise<IChat | boolean> {
+    console.log(id);
     try {
       const result = await this.chatRepository
-        .createQueryBuilder(ChatEntity, "auth")
-        .where("auth.id = :id", { id })
+        .createQueryBuilder(Chat, "chat")
+        .where("chat.clientId = :id", { id })
         .getOne();
       if (!result) {
-        new AppError("nao achou");
+        return false;
       }
       return result;
     } catch (error) {
-      new AppError(error);
+      return false;
+    }
+  }
+  public async listbylawyer(id: string): Promise<IChat | boolean> {
+    try {
+      const result = await this.chatRepository
+        .createQueryBuilder(Chat, "chat")
+        .where("chat.lawyerId = :id", { id })
+        .getOne();
+      if (!result) {
+        return false;
+      }
+      return result;
+    } catch (error) {
+      return false;
+    }
+  }
+  public async listById(id: string): Promise<IChat | boolean> {
+    try {
+      const result = await this.chatRepository
+        .createQueryBuilder(Chat, "auth")
+        .where("auth.id = :id", { id })
+        .getOne();
+      if (!result) {
+        return false;
+      }
+      return result;
+    } catch (error) {
+      return false;
     }
   }
   public async findRoomByName(room_name: string): Promise<IChat | boolean> {
     try {
       const result = await this.chatRepository
-        .createQueryBuilder(ChatEntity, "chat")
+        .createQueryBuilder(Chat, "chat")
         .where("chat.room_name = :room_name AND auth.is_active = 'active'", {
           room_name,
         })
@@ -74,7 +99,7 @@ export class ChatRepository implements IChatRespository {
       }
       return result;
     } catch (error) {
-      new AppError(error);
+      return false;
     }
   }
 }

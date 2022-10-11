@@ -20,6 +20,6 @@ export class UpdateChatController {
 
     await updateUseCase.deleteById(id);
 
-    return response.json("Auth deleted");
+    return response.json("chat deleted");
   }
 }

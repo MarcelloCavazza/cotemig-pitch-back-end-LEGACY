@@ -19,6 +19,13 @@ export class CreateChat1665498181180 implements MigrationInterface {
             isNullable: false,
           },
           {
+            name: "room_name",
+            type: "varchar",
+            length: "50",
+            isNullable: false,
+          },
+
+          {
             name: "clientId",
             type: "varchar",
             length: "50",
