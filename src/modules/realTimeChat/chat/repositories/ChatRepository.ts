@@ -73,6 +73,7 @@ export class ChatRepository implements IChatRespository {
     }
   }
   public async listById(id: string): Promise<IChat | boolean> {
+    console.log(id);
     try {
       const result = await this.chatRepository
         .createQueryBuilder(Chat, "chat")

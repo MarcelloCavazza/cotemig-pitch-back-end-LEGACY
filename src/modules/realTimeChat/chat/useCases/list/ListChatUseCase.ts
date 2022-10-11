@@ -1,12 +1,6 @@
 import { AppError } from "../../../../../shared/mainError/mainErrorClass";
 import { Chat } from "../../domain/chat";
 import { ChatRepository } from "../../repositories/ChatRepository";
-import { compareSync } from "bcrypt";
-import moment = require("moment");
-import { CreateChatUseCase } from "../create/CreateChatUseCase";
-import { UpdateChatUseCase } from "../update/UpdateChatUseCase";
-import e = require("express");
-
 export class ListChatUseCase {
   private repository = new ChatRepository();
 
