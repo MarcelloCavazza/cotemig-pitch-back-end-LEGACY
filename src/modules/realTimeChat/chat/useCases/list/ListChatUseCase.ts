@@ -19,6 +19,15 @@ export class ListChatUseCase {
     }
   }
 
+  public async findRoomByName(name: string): Promise<Chat | boolean> {
+    try {
+      const chat = await this.repository.findRoomByName(name);
+      return chat;
+    } catch (error) {
+      new AppError(error);
+    }
+  }
+
   public async listbyclient(id: string): Promise<Chat | boolean> {
     try {
       const chat = await this.repository.listbyclient(id);

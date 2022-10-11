@@ -24,4 +24,11 @@ export class ListChatController {
     const chat = await listChatUseCase.listbylawyer(id);
     return response.json(chat);
   }
+
+  public async findRoomByName(request: Request, response: Response) {
+    const { name } = request.params;
+    const listChatUseCase = new ListChatUseCase();
+    const chat = await listChatUseCase.findRoomByName(name);
+    return response.json(chat);
+  }
 }
