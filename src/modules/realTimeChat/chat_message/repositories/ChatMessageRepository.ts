@@ -1,11 +1,9 @@
 import { AppDataSource } from "../../../../shared/database/data-source";
-import { AppError } from "../../../../shared/mainError/mainErrorClass";
-import { STATUS_CHAT } from "../domain/chat_message";
 import { IChat } from "../dto/ChatMessageDTO";
 import { ChatMessage } from "../infra/entities/ChatMessageEntity";
-import { IChatRespository } from "./IChatMessageRepository";
+import { IChatMessageRespository } from "./IChatMessageRepository";
 
-export class ChatMessageRepository implements IChatRespository {
+export class ChatMessageRepository implements IChatMessageRespository {
   private chatRepository = AppDataSource.manager;
 
   public async create(data: IChat) {

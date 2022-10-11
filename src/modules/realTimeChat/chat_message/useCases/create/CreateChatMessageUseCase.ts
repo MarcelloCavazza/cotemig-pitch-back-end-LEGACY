@@ -4,12 +4,7 @@ import { v4 as uuid } from "uuid";
 import { ChatMessageRepository } from "../../repositories/ChatMessageRepository";
 import { ChatRepository } from "../../../chat/repositories/ChatRepository";
 import { formatDate } from "../../../../../shared/utils/formatDate";
-import { AppError } from "../../../../../shared/mainError/mainErrorClass";
-import { hashSync } from "bcrypt";
-import { sign } from "jsonwebtoken";
 import * as dotenv from "dotenv";
-import { LawyerRepository } from "../../../../account/lawyer/repositories/LawyerRepository";
-import { ClientRepository } from "../../../../account/client/repositories/ClientRepository";
 dotenv.config();
 
 export class CreateChatMessageUseCase {
@@ -19,28 +14,32 @@ export class CreateChatMessageUseCase {
 
   public async create(data: IRecieveCreateChatData): Promise<IChat | String> {
     const { chat_id, message_content, sender_id } = data;
-    const chatExists = await this.repositoryChat.listById(chat_id);
+    const chatExists: any = await this.repositoryChat.listById(chat_id);
     if (chatExists) {
-      this.chat.id = uuid();
+      if (
+        sender_id == chatExists.clientId ||
+        sender_id == chatExists.lawyerId
+      ) {
+        this.chat.id = uuid();
 
-      Object.assign(this.chat, {
-        chat_id,
-        message_content,
-        sender_id,
-        is_active: STATUS_CHAT.ACTIVE,
-        created_at: formatDate(new Date().toISOString()),
-      });
-      console.log(this.chat);
-      try {
-        await this.repositoryChatMessage.create(this.chat);
-      } catch (error) {
-        console.log(error);
-        return "erro ao criar o chat";
+        Object.assign(this.chat, {
+          chat_id,
+          message_content,
+          sender_id,
+          is_active: STATUS_CHAT.ACTIVE,
+          created_at: formatDate(new Date().toISOString()),
+        });
+        try {
+          await this.repositoryChatMessage.create(this.chat);
+        } catch (error) {
+          console.log(error);
+          return "erro ao criar o chat";
+        }
+        return this.chat;
       }
-
-      return this.chat;
+      return "usuario nao pode enviar mensagem ou nao existe";
     }
 
-    return "conta nao existe";
+    return "chat nao existe";
   }
 }
