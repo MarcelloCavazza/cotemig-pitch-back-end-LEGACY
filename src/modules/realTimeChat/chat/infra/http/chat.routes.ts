@@ -18,6 +18,7 @@ chat.get("/listby/:id", listController.listById);
 chat.get("/listbyclient/:id", listController.listbyclient);
 chat.get("/listbylawyer/:id", listController.listbylawyer);
 chat.get("/findRoomByName/:name", listController.findRoomByName);
+chat.get("/get_all_rooms", listController.getAllRooms);
 chat.delete("/deleteby/:id", updateController.deleteById);
 
 export { chat };
