@@ -12,7 +12,8 @@ chat_message.get("/status", (req, res) => {
 const createController = new CreateChatMessageController();
 const listController = new ListChatMessageController();
 
-chat_message.post("/sendmessage", checkToken, createController.sendMessage);
-chat_message.get("/listbychatid/:id", checkToken, listController.listbychatid);
+
+chat_message.post("/sendmessage"/*, checkToken*/, createController.sendMessage);
+chat_message.get("/listbychatid/:id"/*, checkToken*/, listController.listbychatid);
 
 export { chat_message };
