@@ -19,7 +19,5 @@ app.use("/v1", routes);
 app.use(handleError);
 
 app.listen(3000, () => {
-  console.log(
-    "Express server has started on port 3000. Open http://localhost:3000/"
-  );
+  console.log(app);
 });
