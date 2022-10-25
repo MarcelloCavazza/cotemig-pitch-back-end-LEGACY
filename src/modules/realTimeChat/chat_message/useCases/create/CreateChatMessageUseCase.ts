@@ -14,12 +14,8 @@ export class CreateChatMessageUseCase {
 
   public async create(data: IRecieveCreateChatData): Promise<IChat | String> {
     const { chat_id, message_content, sender_id } = data;
-    const chatExists: any = await this.repositoryChat.listById(chat_id);
-    if (chatExists) {
-      if (
-        sender_id == chatExists.clientId ||
-        sender_id == chatExists.lawyerId
-      ) {
+    await this.repositoryChat.listById(chat_id).then(async (result: any) => {
+      if (sender_id == result.clientId || sender_id == result.lawyerId) {
         this.chat.id = uuid();
 
         Object.assign(this.chat, {
@@ -37,8 +33,7 @@ export class CreateChatMessageUseCase {
         }
         return this.chat;
       }
-      return "usuario nao pode enviar mensagem ou nao existe";
-    }
+    });
 
     return "chat nao existe";
   }
