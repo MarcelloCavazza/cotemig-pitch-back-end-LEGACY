@@ -27,7 +27,7 @@ export class CreateClientUseCase {
     try {
       await this.repository.create(this.client);
     } catch (error) {
-      new AppError(error);
+      console.log(error);
     }
 
     return this.client;
