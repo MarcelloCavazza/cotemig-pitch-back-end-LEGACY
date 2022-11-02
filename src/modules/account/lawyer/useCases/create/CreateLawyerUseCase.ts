@@ -5,9 +5,9 @@ import { LawyerRepository } from "../../repositories/LawyerRepository";
 import { formatDate } from "../../../../../shared/utils/formatDate";
 import { hashSync } from "bcrypt";
 import { AppError } from "../../../../../shared/mainError/mainErrorClass";
-import { Client } from "src/modules/account/client/domain/Client";
-import { ClientRepository } from "src/modules/account/client/repositories/ClientRepository";
-import { User } from "src/modules/account/client/infra/entities/ClientEntity";
+import { Client } from "../../../../../modules/account/client/domain/Client";
+import { ClientRepository } from "../../../../../modules/account/client/repositories/ClientRepository";
+import { User } from "../../../../../modules/account/client/infra/entities/ClientEntity";
 
 export class CreateLawyerUseCase {
   private lawyer = new Lawyer();
