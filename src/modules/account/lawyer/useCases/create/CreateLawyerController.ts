@@ -12,7 +12,6 @@ export class CreateLawyerController {
       telephone,
       seccional,
       oab_number,
-      inscrition_type,
     } = request.body;
 
     const createLawyerUseCase = new CreateLawyerUseCase();
@@ -21,7 +20,6 @@ export class CreateLawyerController {
       name,
       cpf,
       email,
-      inscrition_type,
       password,
       telephone,
       seccional,

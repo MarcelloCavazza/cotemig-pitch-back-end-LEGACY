@@ -5,9 +5,11 @@ import { LawyerRepository } from "../../repositories/LawyerRepository";
 import { formatDate } from "../../../../../shared/utils/formatDate";
 import { hashSync } from "bcrypt";
 import { AppError } from "../../../../../shared/mainError/mainErrorClass";
+import { Client } from "src/modules/account/client/domain/Client";
 
 export class CreateLawyerUseCase {
-  private client = new Lawyer();
+  private lawyer = new Lawyer();
+  private user = new Client();
   private repository = new LawyerRepository();
 
   public async create(data: IRecieveCreateLawyerData): Promise<Lawyer> {
@@ -20,14 +22,14 @@ export class CreateLawyerUseCase {
       telephone,
       seccional,
       oab_number,
-      inscrition_type,
     } = data;
 
-    Object.assign(this.client, {
-      id: optionalId ? optionalId : uuid(),
+    const id = optionalId ? optionalId : uuid();
+
+    Object.assign(this.user, {
+      id,
       cpf,
       email,
-      oab_number,
       is_active: STATUS_LAWYER.ACTIVE,
       name,
       password: hashSync(password, 12),
@@ -35,31 +37,30 @@ export class CreateLawyerUseCase {
       created_at: formatDate(new Date().toISOString()),
     });
 
+    Object.assign(this.lawyer, {
+      id,
+      user_id: id,
+      oab_number,
+      is_active: STATUS_LAWYER.ACTIVE,
+      created_at: formatDate(new Date().toISOString()),
+    });
+
     if (seccional) {
-      Object.assign(this.client, {
+      Object.assign(this.user, {
         seccional,
       });
     } else {
-      Object.assign(this.client, {
+      Object.assign(this.user, {
         seccional: "Todas",
-      });
-    }
-    if (inscrition_type) {
-      Object.assign(this.client, {
-        inscrition_type,
-      });
-    } else {
-      Object.assign(this.client, {
-        inscrition_type: "Todas",
       });
     }
 
     try {
-      await this.repository.create(this.client);
+      await this.repository.create(this.lawyer);
     } catch (error) {
-      new AppError(error);
+      return error;
     }
 
-    return this.client;
+    return this.lawyer;
   }
 }

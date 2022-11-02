@@ -6,7 +6,6 @@ export interface IRecieveCreateLawyerData {
   optionalId?: string;
   oab_number: string;
   password: string;
-  inscrition_type: string;
   telephone: string;
 }
 
@@ -16,7 +15,6 @@ export interface ILawyer {
   oab_number: string;
   seccional: string;
   name: string;
-  inscrition_type: string;
   cpf: string;
   email: string;
   password: string;
@@ -31,7 +29,6 @@ export interface IRecieveUpdateLawyerData {
   seccional?: string;
   oab_number?: string;
   name?: string;
-  inscrition_type?: string;
   cpf?: string;
   email?: string;
   password?: string;
