@@ -1,5 +1,6 @@
 import { AppDataSource } from "../../../../shared/database/data-source";
 import { AppError } from "../../../../shared/mainError/mainErrorClass";
+import { Client } from "../../client/domain/Client";
 import { STATUS_LAWYER } from "../domain/Lawyer";
 import { ILawyer } from "../dto/LawyerDTO";
 import { Lawyer } from "../infra/entities/LawyerEntity";
@@ -44,16 +45,24 @@ export class LawyerRepository implements ILawyerRepository {
       new AppError(error);
     }
   }
-  public async listById(id: string): Promise<ILawyer | boolean> {
+  public async listById(id: string): Promise<any | boolean> {
     try {
-      const result = await this.clientRepository
+      const resultLawyer = await this.clientRepository
         .createQueryBuilder(Lawyer, "lawyer")
         .where("lawyer.id = :id AND lawyer.is_active = 'active'", { id })
         .getOne();
-      if (!result) {
+      if (!resultLawyer) {
         return false;
       }
-      return result;
+      const userId = resultLawyer.id;
+      const resultUser = await this.clientRepository
+        .createQueryBuilder(Client, "user")
+        .where("user.id = :id AND user.is_active = 'active'", { userId })
+        .getOne();
+      if (!resultUser) {
+        return false;
+      }
+      return { resultLawyer, resultUser };
     } catch (error) {
       return false;
     }

@@ -6,7 +6,6 @@ export enum STATUS_AUTH {
 export class Auth {
   public id: string;
   public is_active: string;
-  public is_admin: string;
   public email: string;
   public token: string;
   public password: string;

@@ -1,9 +1,12 @@
 import { Entity, Column, PrimaryColumn } from "typeorm";
 
 @Entity()
-export class Client {
+export class User {
   @PrimaryColumn()
   id: string;
+
+  @Column()
+  seccional: string;
 
   @Column()
   name: string;

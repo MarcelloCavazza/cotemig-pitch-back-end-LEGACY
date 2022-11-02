@@ -6,28 +6,10 @@ export class Lawyer {
   id: string;
 
   @Column()
-  name: string;
-
-  @Column()
-  seccional: string;
-
-  @Column()
-  inscrition_type: string;
+  user_id: string;
 
   @Column()
   oab_number: string;
-
-  @Column()
-  cpf: string;
-
-  @Column()
-  email: string;
-
-  @Column()
-  password: string;
-
-  @Column()
-  telephone: string;
 
   @Column()
   is_active: string;

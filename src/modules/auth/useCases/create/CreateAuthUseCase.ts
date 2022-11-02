@@ -14,24 +14,22 @@ export class CreateAuthUseCase {
   private repository = new AuthRepository();
 
   public async create(data: IRecieveCreateAuthData): Promise<Auth | String> {
-    const { email, password, is_admin } = data;
+    const { email, password } = data;
     let emailExists = await this.repository.findUserByEmail(email);
+    const id = uuid();
     if (!emailExists) {
-      this.auth.password = hashSync(password, 12);
-      this.auth.id = uuid();
-
       Object.assign(this.auth, {
+        id,
+        password: hashSync(password, 12),
         email,
-        is_admin: `${is_admin == undefined ? "false" : "true"}`,
-        token: this.createToken(is_admin),
+        token: this.createToken(email, id),
         is_active: STATUS_AUTH.ACTIVE,
         created_at: formatDate(new Date().toISOString()),
       });
-
       try {
         await this.repository.create(this.auth);
       } catch (error) {
-        new AppError(error);
+        console.log(error);
       }
 
       return this.auth;
@@ -40,14 +38,18 @@ export class CreateAuthUseCase {
     return "email already exists";
   }
 
-  public createToken(is_admin: boolean) {
-    let secretKey = process.env.SECRET_KEY_USER;
-    if (is_admin) {
-      secretKey = process.env.SECRET_KEY_ADMIN;
-    }
-    return sign({}, secretKey, {
-      subject: String(this.auth.id),
-      expiresIn: String(process.env.EXPIRATION_TIME),
-    });
+  public createToken(user_mail: string, id: string) {
+    const secretKey = process.env.SECRET_KEY_USER;
+    return sign(
+      {
+        user_id: id,
+        user_mail,
+      },
+      secretKey,
+      {
+        subject: String(this.auth.id),
+        expiresIn: String(process.env.EXPIRATION_TIME),
+      }
+    );
   }
 }

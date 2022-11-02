@@ -8,53 +8,14 @@ export class UpdateLawyerUseCase {
   private client = new Lawyer();
   private repository = new LawyerRepository();
   public async updateById(data: IRecieveUpdateLawyerData): Promise<void> {
-    const {
-      id,
-      cpf,
-      email,
-      name,
-      password,
-      is_active,
-      telephone,
-      inscrition_type,
-    } = data;
+    const { id, is_active } = data;
     Object.assign(this.client, {
       id,
       updated_at: formatDate(new Date().toISOString()),
     });
-    if (cpf) {
-      Object.assign(this.client, {
-        cpf,
-      });
-    }
-    if (email) {
-      Object.assign(this.client, {
-        email,
-      });
-    }
-    if (name) {
-      Object.assign(this.client, {
-        name,
-      });
-    }
-    if (password) {
-      Object.assign(this.client, {
-        password: hashSync(password, 12),
-      });
-    }
-    if (inscrition_type) {
-      Object.assign(this.client, {
-        inscrition_type,
-      });
-    }
     if (is_active) {
       Object.assign(this.client, {
         is_active,
-      });
-    }
-    if (telephone) {
-      Object.assign(this.client, {
-        telephone,
       });
     }
 

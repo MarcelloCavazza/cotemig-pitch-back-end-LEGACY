@@ -9,6 +9,7 @@ export class Client {
   public name: string;
   public cpf: string;
   public email: string;
+  public seccional: string;
   public password: string;
   public telephone: string;
   public created_at: string;

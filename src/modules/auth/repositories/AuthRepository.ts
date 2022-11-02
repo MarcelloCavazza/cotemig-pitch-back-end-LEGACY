@@ -66,11 +66,11 @@ export class AuthRepository implements IAuthRespository {
         })
         .getOne();
       if (!result) {
-        new AppError("nao achou");
+        console.log("nao achou");
       }
       return result;
     } catch (error) {
-      new AppError(error);
+      console.log(error);
     }
   }
 }

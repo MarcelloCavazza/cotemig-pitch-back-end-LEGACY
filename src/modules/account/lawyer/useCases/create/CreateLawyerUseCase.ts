@@ -5,29 +5,26 @@ import { LawyerRepository } from "../../repositories/LawyerRepository";
 import { formatDate } from "../../../../../shared/utils/formatDate";
 import { hashSync } from "bcrypt";
 import { AppError } from "../../../../../shared/mainError/mainErrorClass";
+import { Client } from "../../../../../modules/account/client/domain/Client";
+import { ClientRepository } from "../../../../../modules/account/client/repositories/ClientRepository";
+import { User } from "../../../../../modules/account/client/infra/entities/ClientEntity";
 
 export class CreateLawyerUseCase {
-  private client = new Lawyer();
-  private repository = new LawyerRepository();
+  private lawyer = new Lawyer();
+  private user = new Client();
+  private repositoryLawyer = new LawyerRepository();
+  private repositoryClient = new ClientRepository();
 
-  public async create(data: IRecieveCreateLawyerData): Promise<Lawyer> {
-    const {
-      optionalId,
+  public async create(data: IRecieveCreateLawyerData): Promise<any> {
+    const { cpf, email, name, password, telephone, seccional, oab_number } =
+      data;
+
+    const id = uuid();
+
+    Object.assign(this.user, {
+      id,
       cpf,
       email,
-      name,
-      password,
-      telephone,
-      seccional,
-      oab_number,
-      inscrition_type,
-    } = data;
-
-    Object.assign(this.client, {
-      id: optionalId ? optionalId : uuid(),
-      cpf,
-      email,
-      oab_number,
       is_active: STATUS_LAWYER.ACTIVE,
       name,
       password: hashSync(password, 12),
@@ -35,31 +32,38 @@ export class CreateLawyerUseCase {
       created_at: formatDate(new Date().toISOString()),
     });
 
+    Object.assign(this.lawyer, {
+      id: uuid(),
+      user_id: id,
+      oab_number,
+      is_active: STATUS_LAWYER.ACTIVE,
+      created_at: formatDate(new Date().toISOString()),
+    });
+
     if (seccional) {
-      Object.assign(this.client, {
+      Object.assign(this.user, {
         seccional,
       });
     } else {
-      Object.assign(this.client, {
+      Object.assign(this.user, {
         seccional: "Todas",
       });
     }
-    if (inscrition_type) {
-      Object.assign(this.client, {
-        inscrition_type,
-      });
-    } else {
-      Object.assign(this.client, {
-        inscrition_type: "Todas",
-      });
-    }
 
-    try {
-      await this.repository.create(this.client);
-    } catch (error) {
-      new AppError(error);
-    }
+    await this.repositoryLawyer
+      .create(this.lawyer)
+      .then(async () => {
+        await this.repositoryClient.create(this.user).catch((error) => {
+          return error;
+        });
+      })
+      .catch((error) => {
+        return error;
+      });
 
-    return this.client;
+    const lawyerInfo = this.lawyer;
+    const userInfo = this.user;
+
+    return { lawyerInfo, userInfo };
   }
 }

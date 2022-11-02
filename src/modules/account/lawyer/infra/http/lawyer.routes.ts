@@ -14,7 +14,7 @@ lawyer.get("/status", (req, res) => {
 });
 
 lawyer.post("/create", createController.create);
-lawyer.get("/listby/:id", checkToken, listController.listById);
+lawyer.get("/listby/:id", listController.listById);
 lawyer.patch("/updateby/:id", checkToken, updateController.updateById);
 lawyer.delete("/deleteby/:id", checkToken, updateController.deleteById);
 
