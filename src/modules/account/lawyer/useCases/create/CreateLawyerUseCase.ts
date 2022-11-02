@@ -41,7 +41,7 @@ export class CreateLawyerUseCase {
     });
 
     Object.assign(this.lawyer, {
-      id,
+      id: uuid(),
       user_id: id,
       oab_number,
       is_active: STATUS_LAWYER.ACTIVE,
