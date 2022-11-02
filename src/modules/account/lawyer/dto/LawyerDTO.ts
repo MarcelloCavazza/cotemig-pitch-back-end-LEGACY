@@ -11,6 +11,7 @@ export interface IRecieveCreateLawyerData {
 
 export interface ILawyer {
   id: string;
+  id_user: string;
   is_active: string;
   oab_number: string;
   seccional: string;
@@ -23,9 +24,4 @@ export interface IRecieveUpdateLawyerData {
   is_active?: string;
   seccional?: string;
   oab_number?: string;
-  name?: string;
-  cpf?: string;
-  email?: string;
-  password?: string;
-  telephone?: string;
 }
