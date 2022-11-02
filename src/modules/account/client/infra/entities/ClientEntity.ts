@@ -6,6 +6,9 @@ export class User {
   id: string;
 
   @Column()
+  seccional: string;
+
+  @Column()
   name: string;
 
   @Column()

@@ -6,7 +6,7 @@ export class Lawyer {
   id: string;
 
   @Column()
-  seccional: string;
+  user_id: string;
 
   @Column()
   oab_number: string;

@@ -16,18 +16,10 @@ export class CreateLawyerUseCase {
   private repositoryClient = new ClientRepository();
 
   public async create(data: IRecieveCreateLawyerData): Promise<any> {
-    const {
-      optionalId,
-      cpf,
-      email,
-      name,
-      password,
-      telephone,
-      seccional,
-      oab_number,
-    } = data;
+    const { cpf, email, name, password, telephone, seccional, oab_number } =
+      data;
 
-    const id = optionalId ? optionalId : uuid();
+    const id = uuid();
 
     Object.assign(this.user, {
       id,
