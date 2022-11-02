@@ -20,8 +20,7 @@ export class ListAuthUseCase {
 
   public async findUserByEmail(
     email: string,
-    password: string,
-    is_admin: boolean
+    password: string
   ): Promise<Auth | String> {
     try {
       let auth = await this.repository.findUserByEmail(email);
@@ -36,7 +35,7 @@ export class ListAuthUseCase {
           }
         } else {
           const newToken = new CreateAuthUseCase();
-          const newCreatedToken = newToken.createToken(is_admin);
+          const newCreatedToken = newToken.createToken(email);
           const updateUseCase = new UpdateAuthUseCase();
           await updateUseCase.updateById({
             id: auth.id,
