@@ -14,11 +14,6 @@ export interface ILawyer {
   is_active: string;
   oab_number: string;
   seccional: string;
-  name: string;
-  cpf: string;
-  email: string;
-  password: string;
-  telephone: string;
   created_at: string;
   updated_at?: string;
 }

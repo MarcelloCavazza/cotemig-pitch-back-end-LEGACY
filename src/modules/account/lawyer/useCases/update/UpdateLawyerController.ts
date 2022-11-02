@@ -4,21 +4,12 @@ import { UpdateLawyerUseCase } from "./UpdateLawyerUseCase";
 export class UpdateLawyerController {
   public async updateById(request: Request, response: Response) {
     const { id } = request.params;
-    const {
-      name,
-      cpf,
-      email,
-      password,
-      telephone,
-      is_active,
-      inscrition_type,
-    } = request.body;
+    const { name, cpf, email, password, telephone, is_active } = request.body;
     const updateUseCase = new UpdateLawyerUseCase();
 
     await updateUseCase.updateById({
       id,
       is_active,
-      inscrition_type,
       name,
       cpf,
       email,
