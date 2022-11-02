@@ -32,7 +32,7 @@
     "scripts": {
         "start:prod": "ts-node src/shared/index.ts",
         "start:dev": "ts-node-dev src/shared/index.ts",
-        "build": "tsc --project tsconfig.json && tscpaths -p tsconfig.json -s ./src -o ./dist",
+        "build": "tsc --project tsconfig.json && tscpaths -p tsconfig.json -s ./src -o ./build",
         "typeorm:create": "typeorm-ts-node-commonjs migration:create",
         "typeorm:run": "typeorm-ts-node-commonjs migration:run -d src/shared/database/data-source.ts"
     }
