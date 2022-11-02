@@ -6,13 +6,16 @@ import { formatDate } from "../../../../../shared/utils/formatDate";
 import { hashSync } from "bcrypt";
 import { AppError } from "../../../../../shared/mainError/mainErrorClass";
 import { Client } from "src/modules/account/client/domain/Client";
+import { ClientRepository } from "src/modules/account/client/repositories/ClientRepository";
+import { User } from "src/modules/account/client/infra/entities/ClientEntity";
 
 export class CreateLawyerUseCase {
   private lawyer = new Lawyer();
   private user = new Client();
-  private repository = new LawyerRepository();
+  private repositoryLawyer = new LawyerRepository();
+  private repositoryClient = new ClientRepository();
 
-  public async create(data: IRecieveCreateLawyerData): Promise<Lawyer> {
+  public async create(data: IRecieveCreateLawyerData): Promise<any> {
     const {
       optionalId,
       cpf,
@@ -55,12 +58,20 @@ export class CreateLawyerUseCase {
       });
     }
 
-    try {
-      await this.repository.create(this.lawyer);
-    } catch (error) {
-      return error;
-    }
+    await this.repositoryLawyer
+      .create(this.lawyer)
+      .then(async () => {
+        await this.repositoryClient.create(this.user).catch((error) => {
+          return error;
+        });
+      })
+      .catch((error) => {
+        return error;
+      });
 
-    return this.lawyer;
+    const lawyerInfo = this.lawyer;
+    const userInfo = this.user;
+
+    return { lawyerInfo, userInfo };
   }
 }
