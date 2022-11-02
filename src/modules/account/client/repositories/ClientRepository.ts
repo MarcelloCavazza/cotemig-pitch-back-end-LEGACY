@@ -2,23 +2,21 @@ import { AppDataSource } from "../../../../shared/database/data-source";
 import { AppError } from "../../../../shared/mainError/mainErrorClass";
 import { STATUS_CLIENT } from "../domain/Client";
 import { IClient } from "../dto/ClientDTO";
-import { Client } from "../infra/entities/ClientEntity";
+import { User } from "../infra/entities/ClientEntity";
 import { IClientRespository } from "./IClientRepository";
 
 export class ClientRepository implements IClientRespository {
   private clientRepository = AppDataSource.manager;
 
   public async create(data: IClient) {
-    await this.clientRepository.save(
-      this.clientRepository.create(Client, data)
-    );
+    await this.clientRepository.save(this.clientRepository.create(User, data));
   }
   public async update(data: IClient): Promise<void> {
     const { id, ...params } = data;
     try {
       const result = await this.clientRepository
         .createQueryBuilder()
-        .update(Client)
+        .update(User)
         .set(params)
         .where("id = :id", { id })
         .execute();
@@ -33,7 +31,7 @@ export class ClientRepository implements IClientRespository {
     try {
       const result = await this.clientRepository
         .createQueryBuilder()
-        .update(Client)
+        .update(User)
         .set({ is_active: STATUS_CLIENT.INCATIVE })
         .where("id = :id", { id })
         .execute();
@@ -47,8 +45,8 @@ export class ClientRepository implements IClientRespository {
   public async listById(id: string): Promise<IClient | boolean> {
     try {
       const result = await this.clientRepository
-        .createQueryBuilder(Client, "client")
-        .where("client.id = :id AND client.is_active = 'active'", { id })
+        .createQueryBuilder(User, "user")
+        .where("user.id = :id AND user.is_active = 'active'", { id })
         .getOne();
       if (!result) {
         return false;
