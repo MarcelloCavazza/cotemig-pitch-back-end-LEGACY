@@ -21,7 +21,7 @@ export class CreateAuth1663640529291 implements MigrationInterface {
           {
             name: "token",
             type: "varchar",
-            length: "200",
+            length: "500",
             isNullable: false,
           },
           {

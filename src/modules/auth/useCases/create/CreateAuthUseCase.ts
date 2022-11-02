@@ -16,21 +16,20 @@ export class CreateAuthUseCase {
   public async create(data: IRecieveCreateAuthData): Promise<Auth | String> {
     const { email, password } = data;
     let emailExists = await this.repository.findUserByEmail(email);
+    const id = uuid();
     if (!emailExists) {
-      this.auth.password = hashSync(password, 12);
-      this.auth.id = uuid();
-
       Object.assign(this.auth, {
+        id,
+        password: hashSync(password, 12),
         email,
-        token: this.createToken(email),
+        token: this.createToken(email, id),
         is_active: STATUS_AUTH.ACTIVE,
         created_at: formatDate(new Date().toISOString()),
       });
-
       try {
         await this.repository.create(this.auth);
       } catch (error) {
-        new AppError(error);
+        console.log(error);
       }
 
       return this.auth;
@@ -39,11 +38,11 @@ export class CreateAuthUseCase {
     return "email already exists";
   }
 
-  public createToken(user_mail: string) {
+  public createToken(user_mail: string, id: string) {
     const secretKey = process.env.SECRET_KEY_USER;
     return sign(
       {
-        user_id: String(this.auth.id),
+        user_id: id,
         user_mail,
       },
       secretKey,
