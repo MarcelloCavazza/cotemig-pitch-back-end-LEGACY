@@ -35,7 +35,7 @@ export class ListAuthUseCase {
           }
         } else {
           const newToken = new CreateAuthUseCase();
-          const newCreatedToken = newToken.createToken(email);
+          const newCreatedToken = newToken.createToken(email, auth.id);
           const updateUseCase = new UpdateAuthUseCase();
           await updateUseCase.updateById({
             id: auth.id,
