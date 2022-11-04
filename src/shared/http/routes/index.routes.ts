@@ -17,6 +17,6 @@ routes.use("/lawyer", lawyer);
 routes.use("/auth", auth);
 routes.use("/chat", chat);
 routes.use("/chatmessage", chat_message);
-routes.use("/mail", mailSender);
+routes.use("/email", mailSender);
 
 export { routes };
