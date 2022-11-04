@@ -7,6 +7,7 @@ const mailReset = Router();
 
 mailReset.post("/send", async (req, res) => {
   const { userMail } = req.body;
+
   await transporter
     .sendMail({
       from: process.env.GMAIL_USER,
