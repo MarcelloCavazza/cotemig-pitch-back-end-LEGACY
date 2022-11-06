@@ -16,13 +16,10 @@ export class CreateLawyerUseCase {
   private repositoryClient = new ClientRepository();
 
   public async create(data: IRecieveCreateLawyerData): Promise<any> {
-    const { cpf, email, name, password, telephone, seccional, oab_number } =
-      data;
-
-    const id = uuid();
+    const { cpf, email, name, password, telephone, state, oab_number } = data;
 
     Object.assign(this.user, {
-      id,
+      id: uuid(),
       cpf,
       email,
       is_active: STATUS_LAWYER.ACTIVE,
@@ -34,30 +31,32 @@ export class CreateLawyerUseCase {
 
     Object.assign(this.lawyer, {
       id: uuid(),
-      user_id: id,
+      userID: this.user.id,
       oab_number,
       is_active: STATUS_LAWYER.ACTIVE,
       created_at: formatDate(new Date().toISOString()),
     });
 
-    if (seccional) {
+    if (state) {
       Object.assign(this.user, {
-        seccional,
+        state,
       });
     } else {
       Object.assign(this.user, {
-        seccional: "Todas",
+        state: "all",
       });
     }
-
+    console.log(this.lawyer);
     await this.repositoryLawyer
       .create(this.lawyer)
       .then(async () => {
         await this.repositoryClient.create(this.user).catch((error) => {
+          console.log("priemrio erro", error);
           return error;
         });
       })
       .catch((error) => {
+        console.log(error);
         return error;
       });
 

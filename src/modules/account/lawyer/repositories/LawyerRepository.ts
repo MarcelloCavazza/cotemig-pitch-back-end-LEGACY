@@ -10,6 +10,8 @@ export class LawyerRepository implements ILawyerRepository {
   private clientRepository = AppDataSource.manager;
 
   public async create(data: ILawyer) {
+    console.log("data", data);
+    console.log("data.user_id", data.userID);
     await this.clientRepository.save(
       this.clientRepository.create(Lawyer, data)
     );

@@ -5,7 +5,7 @@ export enum STATUS_LAWYER {
 
 export class Lawyer {
   public id: string;
-  public id_user: string;
+  public userID: string;
   public is_active: string;
   public oab_number: string;
   public created_at: string;

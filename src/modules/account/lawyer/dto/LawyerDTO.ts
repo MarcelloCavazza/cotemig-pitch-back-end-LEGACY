@@ -2,7 +2,7 @@ export interface IRecieveCreateLawyerData {
   name: string;
   cpf: string;
   email: string;
-  seccional: string;
+  state: string;
   oab_number: string;
   password: string;
   telephone: string;
@@ -10,7 +10,7 @@ export interface IRecieveCreateLawyerData {
 
 export interface ILawyer {
   id: string;
-  id_user: string;
+  userID: string;
   is_active: string;
   oab_number: string;
   created_at: string;
