@@ -3,7 +3,7 @@ export interface IRecieveCreateClientData {
   cpf: string;
   email: string;
   password: string;
-  seccional: string;
+  state: string;
   optionalId: string;
   telephone: string;
 }
@@ -11,13 +11,13 @@ export interface IRecieveCreateClientData {
 export interface IClient {
   id: string;
   is_active: string;
-  seccional: string;
+  state: string;
   name: string;
   cpf: string;
   email: string;
   password: string;
   telephone: string;
-  created_at: string;
+  created_at?: string;
   updated_at?: string;
 }
 

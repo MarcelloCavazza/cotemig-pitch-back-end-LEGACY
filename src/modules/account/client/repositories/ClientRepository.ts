@@ -21,10 +21,10 @@ export class ClientRepository implements IClientRespository {
         .where("id = :id", { id })
         .execute();
       if (!result) {
-        new AppError("nao foi possivel atualizar");
+        console.log("nao foi possivel atualizar");
       }
     } catch (error) {
-      new AppError(error);
+      console.log(error);
     }
   }
   public async deleteById(id: string): Promise<void> {
@@ -36,10 +36,10 @@ export class ClientRepository implements IClientRespository {
         .where("id = :id", { id })
         .execute();
       if (!result) {
-        new AppError("nao foi possivel remover");
+        console.log("nao foi possivel remover");
       }
     } catch (error) {
-      new AppError(error);
+      console.log(error);
     }
   }
   public async listById(id: string): Promise<IClient | boolean> {
@@ -53,7 +53,7 @@ export class ClientRepository implements IClientRespository {
       }
       return result;
     } catch (error) {
-      new AppError(error);
+      console.log(error);
     }
   }
 }

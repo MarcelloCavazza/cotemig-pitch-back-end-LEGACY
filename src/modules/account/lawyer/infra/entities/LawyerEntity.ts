@@ -15,7 +15,7 @@ export class Lawyer {
   is_active: string;
 
   @Column()
-  created_at: string;
+  created_at?: string;
 
   @Column()
   updated_at?: string;

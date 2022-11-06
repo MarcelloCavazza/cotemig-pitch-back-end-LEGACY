@@ -3,7 +3,7 @@ import { CreateClientUseCase } from "./CreateClientUseCase";
 
 export class CreateClientController {
   public async create(request: Request, response: Response): Promise<Response> {
-    const { name, cpf, email, password, telephone, optionalId, seccional } =
+    const { name, cpf, email, password, telephone, optionalId, state } =
       request.body;
 
     const createClientUseCase = new CreateClientUseCase();
@@ -12,7 +12,7 @@ export class CreateClientController {
       name,
       cpf,
       email,
-      seccional,
+      state,
       password,
       telephone,
     });

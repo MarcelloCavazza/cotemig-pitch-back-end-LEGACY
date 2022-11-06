@@ -6,7 +6,7 @@ export class User {
   id: string;
 
   @Column()
-  seccional: string;
+  state: string;
 
   @Column()
   name: string;
@@ -27,7 +27,7 @@ export class User {
   is_active: string;
 
   @Column()
-  created_at: string;
+  created_at?: string;
 
   @Column()
   updated_at?: string;
