@@ -5,6 +5,7 @@ import { compareSync } from "bcrypt";
 import moment = require("moment");
 import { CreateAuthUseCase } from "../create/CreateAuthUseCase";
 import { UpdateAuthUseCase } from "../update/UpdateAuthUseCase";
+import { ClientRepository } from "../../../account/client/repositories/ClientRepository";
 
 export class ListAuthUseCase {
   private repository = new AuthRepository();
@@ -26,16 +27,20 @@ export class ListAuthUseCase {
       let auth = await this.repository.findUserByEmail(email);
       if (auth) {
         const isExpired = this.isExpired(auth.created_at);
+        let client = await new ClientRepository().findUserByEmail(email);
+        const to_return = new Auth()//{id: client != undefined ? client.id : null, token: auth.token}
+        to_return.id = client != undefined ? client.id : null
+        to_return.token = new CreateAuthUseCase().createToken(email, client.id)
         if (!isExpired) {
           const result = compareSync(password, auth.password);
           if (result) {
-            return auth;
+            return to_return;
           } else {
             return "Wrong Credentials";
           }
         } else {
           const newToken = new CreateAuthUseCase();
-          const newCreatedToken = newToken.createToken(email, auth.id);
+          const newCreatedToken = newToken.createToken(email, client.id);
           const updateUseCase = new UpdateAuthUseCase();
           await updateUseCase.updateById({
             id: auth.id,
@@ -43,6 +48,7 @@ export class ListAuthUseCase {
           });
           let updatedAuth = await this.repository.findUserByEmail(email);
           const result = compareSync(password, auth.password);
+
           if (result) {
             return updatedAuth;
           } else {

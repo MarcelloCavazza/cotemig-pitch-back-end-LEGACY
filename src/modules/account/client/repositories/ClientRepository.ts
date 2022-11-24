@@ -56,4 +56,20 @@ export class ClientRepository implements IClientRespository {
       new AppError(error);
     }
   }
+  public async findUserByEmail(email: string): Promise<IClient> {
+    try {
+      const result = await this.clientRepository
+        .createQueryBuilder(User, "user")
+        .where("user.email = :email AND user.is_active = 'active'", {
+          email,
+        })
+        .getOne();
+      if (!result) {
+        console.log("nao achou");
+      }
+      return result;
+    } catch (error) {
+      console.log(error);
+    }
+  }
 }

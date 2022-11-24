@@ -7,6 +7,7 @@ import { AppError } from "../../../../shared/mainError/mainErrorClass";
 import { hashSync } from "bcrypt";
 import { sign } from "jsonwebtoken";
 import * as dotenv from "dotenv";
+import { ClientRepository } from "../../../account/client/repositories/ClientRepository";
 dotenv.config();
 
 export class CreateAuthUseCase {
@@ -16,7 +17,8 @@ export class CreateAuthUseCase {
   public async create(data: IRecieveCreateAuthData): Promise<Auth | String> {
     const { email, password } = data;
     let emailExists = await this.repository.findUserByEmail(email);
-    const id = uuid();
+    let user_id = await new ClientRepository().findUserByEmail(email)
+    const id = user_id != null ? user_id.id : uuid();
     if (!emailExists) {
       Object.assign(this.auth, {
         id,

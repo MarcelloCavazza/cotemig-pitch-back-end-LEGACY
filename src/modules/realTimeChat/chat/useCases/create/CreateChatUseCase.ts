@@ -22,7 +22,7 @@ export class CreateChatUseCase {
     const clientExists = await this.repositoryClient.listById(clientId);
     const lawyerExists = await this.repositoryLawyer.listById(lawyerId);
 
-    if (clientExists && lawyerExists) {
+    //if (clientExists && lawyerExists) {
       const roomExists = await this.repositoryChat.findRoomByName(room_name);
 
       if (!roomExists) {
@@ -44,7 +44,7 @@ export class CreateChatUseCase {
 
         return this.chat;
       }
-    }
+    //}
 
     return "conta nao existe";
   }
