@@ -11,30 +11,48 @@ export class CreateChatMessageUseCase {
   private chat = new ChatMessage();
   private repositoryChatMessage = new ChatMessageRepository();
   private repositoryChat = new ChatRepository();
+  private chatExists = false;
 
   public async create(data: IRecieveCreateChatData): Promise<IChat | String> {
     const { chat_id, message_content, sender_id } = data;
-    await this.repositoryChat.listById(chat_id).then(async (result: any) => {
-      if (sender_id == result.clientId || sender_id == result.lawyerId) {
-        this.chat.id = uuid();
-
+    console.log(chat_id)
+    try{
+      Object.assign(this.chat, {
+        id: uuid(),
+        chat_id: chat_id,
+        message_content: message_content,
+        sender_id: sender_id,
+        is_active: STATUS_CHAT.ACTIVE,
+        created_at: formatDate(new Date().toISOString()),
+      });
+      await this.repositoryChatMessage.create(this.chat);
+      this.chatExists = true;
+    } catch(e){
+      console.log(e)
+    }
+    /*this.repositoryChat.listById(chat_id).then(async function (result: any){
+      //if (sender_id == result.clientId || sender_id == result.lawyerId) {
+        console.log(this.chatExists);
+        //this.chat.id = uuid();
         Object.assign(this.chat, {
+          id: uuid(),
           chat_id,
           message_content,
           sender_id,
           is_active: STATUS_CHAT.ACTIVE,
           created_at: formatDate(new Date().toISOString()),
         });
+        console.log(this.chat)
         try {
           await this.repositoryChatMessage.create(this.chat);
         } catch (error) {
           console.log(error);
-          return "erro ao criar o chat";
+          return
         }
-        return this.chat;
-      }
-    });
+        this.chatExists = true;
+      //}
+    });*/
 
-    return "chat nao existe";
+    return this.chatExists ? this.chat : "chat nao existe";
   }
 }
